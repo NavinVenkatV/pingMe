@@ -53,6 +53,9 @@ const checkWebsite = async ({ url, email, userId }: WebsiteMonitor) => {
 
 export async function POST(req: NextRequest) {
     const { url, userId } = await req.json();
+    if(!url || !userId){
+        return NextResponse.json({msg : "Url or userId missing!"})
+    }
 
     const user = await prisma.user.findUnique({
         where: { id: userId },

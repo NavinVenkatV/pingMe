@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 import { PrismaClient } from "@prisma/client";
 import bcrypt, { compare } from "bcrypt"
@@ -52,7 +53,12 @@ const handler = NextAuth({
                 }
             }
 
+        }),
+        GoogleProvider({
+            clientId : process.env.CLIENT_ID || "",
+            clientSecret : process.env.CLIENT_SECRET || ""
         })
+        
     ],
     secret : process.env.NEXTAUTH_SECRET,
     callbacks : {
@@ -61,8 +67,15 @@ const handler = NextAuth({
         },
         async session({session, token} : any){
             session.user.id = token.sub;
+            session.user.image = token.picture
             return session;
-        }
+        },
+        async jwt({ token, user }) {
+            if (user) {
+              token.id = user.id;
+            }
+            return token;
+          },
     }
 })
 
