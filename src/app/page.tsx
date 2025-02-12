@@ -7,6 +7,7 @@ import Lenis from "lenis";
 import Header from "./component/Header";
 import { Raleway } from "next/font/google";
 import { Middle, Middle2 } from "./component/Middle";
+import { Footer } from "./component/Footer";
 
 const font = Raleway({
   subsets : ["latin"]
@@ -24,7 +25,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={`overflow-hidden relative pb-16 ${font.className}`}>
+    <div className={`overflow-hidden relative pb-3 ${font.className}`}>
       <img src="mainImage/pingMef.jpg" alt="bgimg" className="absolute inset-0 z-0"/>
       <Header/>
       <Hero/>
@@ -32,6 +33,7 @@ export default function Home() {
       <Middle/>
       <Slide/>
       <Middle2/>
+      <Footer/>
     </div>
   );
 }

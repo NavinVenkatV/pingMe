@@ -42,7 +42,7 @@ function Slider({ img, left, progress, direction }: any) {
 
 function Phrase({ src }: any) {
     return (
-        <div className="flex gap-5 items-center px-5 text-white">
+        <div className="flex gap-5 items-center px-5  text-slate-400">
             <div className="text-[5vw]">Never Miss a Downtime Again!</div>
             <span className="relative h-[5vw] aspect-[4/2] rounded-full overflow-hidden">
                 <Image style={{ objectFit: "cover" }} src={src} alt="image" fill />
