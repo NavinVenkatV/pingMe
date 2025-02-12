@@ -9,7 +9,7 @@ import { SlSocialTwitter } from "react-icons/sl";
 
 export default function RevealBento(){
     return (
-    <div className="min-h-screen px-4 py-12 text-zinc-50">
+    <div className="min-h-screen px-4 py-12 mt-10 md:mt-16 lg:mt-24 text-zinc-50 relative">
       <motion.div
         initial="initial"
         animate="animate"
@@ -69,7 +69,7 @@ const HeaderBlock = () => (
       alt="avatar"
       className="mb-4 size-14 rounded-full"
     />
-    <h1 className="mb-12 text-4xl font-medium leading-tight">
+    <h1 className="mb-12 text-xl md:text-2xl lg:text-3xl font-medium leading-tight">
       pingMe.{" "}
       <span className="text-gray-500">
       Ship higher-quality software faster.
@@ -146,7 +146,7 @@ const SocialsBlock = () => (
 );
 
 const AboutBlock = () => (
-  <Block className="col-span-12 text-3xl leading-snug">
+  <Block className="col-span-12 text-xl md:text-2xl lg:text-3xl leading-snug">
     <p>
       What pingMe provides?{" "}
       <span className="text-gray-500">

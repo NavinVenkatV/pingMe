@@ -6,6 +6,7 @@ import Slide from "./component/Slide";
 import Lenis from "lenis";
 import Header from "./component/Header";
 import { Raleway } from "next/font/google";
+import { Middle, Middle2 } from "./component/Middle";
 
 const font = Raleway({
   subsets : ["latin"]
@@ -28,7 +29,9 @@ export default function Home() {
       <Header/>
       <Hero/>
       <RevealBento/>
+      <Middle/>
       <Slide/>
+      <Middle2/>
     </div>
   );
 }

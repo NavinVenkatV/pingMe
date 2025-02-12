@@ -14,11 +14,11 @@ export default function Slide() {
     })
     
     return (
-        <div className="overflow-hiddeen mt-14">
+        <div className="overflow-hiddeen my-5 md:my-10 lg:my-44">
             <div ref={container}>
-                <Slider img='/b1.webp' left={'-40%'} progress={scrollYProgress} direction="left"/>
-                <Slider img='/b2.webp' left={'-25%'} progress={scrollYProgress} direction="right"/>
-                <Slider img='/b3.webp' left={'-75%'} progress={scrollYProgress} direction="left"/>
+                <Slider img='/b1.webp' left={'-80%'} progress={scrollYProgress} direction="left"/>
+                <Slider img='/b2.webp' left={'-60%'} progress={scrollYProgress} direction="right"/>
+                {/* <Slider img='/b3.webp' left={'-75%'} progress={scrollYProgress} direction="left"/> */}
             </div>
         </div>
     )
@@ -31,6 +31,8 @@ function Slider({ img, left, progress, direction }: any) {
         <motion.div 
         className="flex whitespace-nowrap relative"
         style={{left : left, x}}>
+            <Phrase src={img} />
+            <Phrase src={img} />
             <Phrase src={img} />
             <Phrase src={img} />
             <Phrase src={img} />

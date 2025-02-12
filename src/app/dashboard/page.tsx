@@ -5,8 +5,9 @@ import Header from "../component/Header";
 import { Button } from "../component/ui/button";
 import { useSession } from "next-auth/react";
 import { Raleway } from "next/font/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "../component/ui/box";
+import { useRouter } from "next/navigation";
 
 const font = Raleway({
     subsets: ["latin"],
@@ -14,8 +15,15 @@ const font = Raleway({
 
 export default function Dashboard() {
     const [url, setUrl] = useState("");
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const [ success, setsSuccess ] = useState(false);
+    const router = useRouter();
+
+    useEffect(()=>{
+        if(status === "unauthenticated"){
+            router.push('/')
+        }
+    },[status])
 
     const handleSubmit = async () => {
         try {
@@ -41,7 +49,7 @@ export default function Dashboard() {
     return (
         <div className={`text-white overflow-hidden ${font.className}`}>
             <Header />
-            {session && (
+            
                 <div className="w-screen h-[90vh] flex justify-center">
                     <div className="flex flex-col justify-center">
                         <div>
@@ -64,7 +72,7 @@ export default function Dashboard() {
                         </div>}
                     </div>
                 </div>
-            )}
+           
         </div>
     );
 }

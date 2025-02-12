@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <div className="w-full px-10 py-3  flex justify-between items-center overflow-hidden z-50 
       bg-[rgba(17,17,29,0.8)] backdrop-blur-lg shadow-md">
-      <img src="l2.png" alt="logo" width={130} height={100} />
+      <a href="/"><img src="l2.png" alt="logo" width={130} height={100} /></a>
       <div className="flex flex-col justify-center items-center">
         <div className="flex gap-2">
           <a href="https://github.com/NavinVenkatV/pingMe..git"
@@ -28,8 +28,8 @@ export default function Header() {
             window.location.href = "/";
           }} /> }
           {/* {session && <span className="text-white text-xl flex justify-center items-center">Welcome {session.user?.name} </span>} */}
-          {session?.user?.image ? <img src={imgUrl} alt="Profile" className="w-9 h-9 rounded-full flex justify-center items-center" /> : 
-          <div className="w-9 h-9 rounded-full flex justify-center items-center">{firstLetter}</div>}
+          {session?.user?.image && <img src={imgUrl} alt="Profile" className="w-9 h-9 rounded-full flex justify-center items-center" /> }
+          {/* // <div className="w-9 h-9 rounded-full flex justify-center items-center">{firstLetter}</div> */}
         </div>
       </div>
     </div>
