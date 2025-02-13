@@ -23,9 +23,10 @@ export default function Dashboard() {
     const router = useRouter();
     const intervals = useRef<Record<string, NodeJS.Timeout | number>>({});
     const [urls, setUrls] = useState<{ url: string; status: string }[]>([]);
-    const [ loading, setLoading ] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [gifloading, setGifloading] = useState(false)
 
-    function Random(){
+    function Random() {
         const no = Math.random();
         return no;
     }
@@ -65,7 +66,7 @@ export default function Dashboard() {
         if (!url) return alert("Please enter a URL");
 
         try {
-            if(urls.some((u) => u.url === url)){
+            if (urls.some((u) => u.url === url)) {
                 alert("Website us already under Monitoring!")
                 return;
             }
@@ -73,9 +74,10 @@ export default function Dashboard() {
             const userId = session?.user?.id;
             if (!userId) return;
 
-            await axios.post("/api/url", { url, userId : Number(userId) });
+            await axios.post("/api/url", { url, userId: Number(userId) });
             setUrls(prevUrls => [...prevUrls, { url, status: "Processing.." }]);
             setLoading(false)
+            setGifloading(true)
             setUrl(""); // Clear input
 
             const interval = setInterval(async () => {
@@ -89,7 +91,7 @@ export default function Dashboard() {
                 } catch (error) {
                     console.error("Error fetching status:", error);
                 }
-            }, 5000);
+            }, 300000);
 
             intervals.current[url] = interval; // Store reference
         } catch (error) {
@@ -103,7 +105,7 @@ export default function Dashboard() {
             const userId = session?.user?.id;
             if (!userId) return;
 
-            await axios.delete("/api/url", { data: { url: deleteUrl, userID : Number(userId) } });
+            await axios.delete("/api/url", { data: { url: deleteUrl, userID: Number(userId) } });
 
             setUrls(prevUrls => prevUrls.filter(u => u.url !== deleteUrl));
 
@@ -120,10 +122,18 @@ export default function Dashboard() {
 
     return (
         <div className={`overflow-hidden pb-3 text-white ${font.className} relative z-0`}>
-            {loading && <div className="= z-50 w-full flex justify-center items-center mt-4 fixed"><AddedUrl/></div>}
+            {gifloading && <div className="= z-50 w-full flex justify-center items-center mt-4 fixed px-2">
+                <div className="w-[350px] h-[350px] p-4 text-neutral-700 bg-white rounded-2xl">
+                    <img src="gif/minions.gif" alt="Funny gif" className="rounded-xl"/>
+                    <div className="mt-3 text-center te">Successfully Added your Website to pingMe</div>
+                    <button onClick={()=>{
+                        setGifloading(false)
+                    }} className="w-full rounded-xl px-3 py-2 bg-blue-500 text-black mt-4 hover:bg-blue-700 transition-all duration-300">Close</button>
+                </div></div>}
             <Header />
             <div className="w-screen min-h-screen flex justify-center p-5">
                 <div className="flex flex-col items-center justify-center w-full max-w-[700px] px-5 rounded-lg">
+                    <img src="gif/leo.gif" alt="Hero fig" className="rounded-xl" />
                     <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center text-slate-400 mt-5">
                         pingMe - Your Website Monitoring Solution
                     </div>
@@ -137,24 +147,26 @@ export default function Dashboard() {
                                 className="rounded-xl w-[300px] bg-black px-3 py-3 focus:outline-none"
                             />
                             <div className="flex items-center justify-center mt-3 md:mt-0">
-                                <button onClick={handleSubmit} className="px-3 py-2 bg-blue-500 text-white flex flex-col justify-center rounded-2xl hover:bg-blue-700 transition-all duration-300 ">{loading ? <Spinner/> : "Add Url"}</button>
+                                <button onClick={handleSubmit} className="px-3 py-2 bg-blue-500 text-white flex flex-col justify-center rounded-2xl hover:bg-blue-700 transition-all duration-300 ">{loading ? <Spinner /> : "Add Url"}</button>
                             </div>
                         </div>
                     </div>
 
                     {urls.length > 0 && (
-                        <div className="mt-5 w-[500px] md:w-[800px] lg:w-[1200px]">
+                        <div className="mt-5 px-auto lg:w-[900px] w-auto">
                             {urls.map(({ url: itemUrl, status }) => (
-                                <div key={Random()} className="bg-neutral-700 text-white p-3 mt-2 rounded-xl md:flex justify-between">
-                                    <div className="flex flex-col items-center justify-center">{itemUrl}</div>
-                                    <div className="flex gap-5">
-                                        <div className="flex flex-col items-center justify-center">Current Status: {status}</div>
-                                        <button
-                                            className="px-2 py-2 bg-red-500 rounded-xl hover:text-2xl flex flex-col items-center justify-center transition-all duration-300"
+                                <div key={Random()} className="bg-black text-white p-3 mt-2 rounded-xl md:flex justify-between">
+                                    <div className="flex flex-col text-sm md:text-xl items-center justify-center text-blue-500 font-bold">{itemUrl}</div>
+                                    <div className="md:flex gap-5">
+                                        <div className="flex md:flex-col text-center items-center justify-center">Current Status: {status}</div>
+                                        <div className="flex justify-center items-center">
+                                            <button
+                                            className="px-2 py-2 mt-4 md:mt-0 bg-red-500 rounded-xl hover:text-2xl flex md:flex-col items-center justify-center transition-all duration-300"
                                             onClick={() => handleDelete(itemUrl)}
-                                        >
-                                            <BsTrash3Fill />
-                                        </button>
+                                            >
+                                                <BsTrash3Fill />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -162,7 +174,7 @@ export default function Dashboard() {
                     )}
                 </div>
             </div>
-            <Slide/>
+            <Slide />
             <Footer />
         </div>
     );
