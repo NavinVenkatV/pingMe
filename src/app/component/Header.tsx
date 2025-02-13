@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function Header() {
   const router = useRouter();
-  const { data: session } = useSession(); // Correct way to access session
+  const { data: session  }  = useSession() as any; // Correct way to access session
     let  imgUrl       = session?.user?.image || "";
     let  firstLetter  = session?.user?.email?.charAt(0).toUpperCase();
   
@@ -28,8 +28,8 @@ export default function Header() {
             window.location.href = "/";
           }} /> }
           {/* {session && <span className="text-white text-xl flex justify-center items-center">Welcome {session.user?.name} </span>} */}
+          {/* {session?.user.name && <div className="w-9 h-9 rounded-full flex justify-center items-center">{firstLetter}</div>} */}
           {session?.user?.image && <img src={imgUrl} alt="Profile" className="w-9 h-9 rounded-full flex justify-center items-center" /> }
-          {/* // <div className="w-9 h-9 rounded-full flex justify-center items-center">{firstLetter}</div> */}
         </div>
       </div>
     </div>

@@ -107,3 +107,25 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ msg: "Website is not found in active monitoring!" });
 }
+export async function GET(req: NextRequest) {
+    const { searchParams } = new URL(req.url);
+    const url = searchParams.get('url');
+    
+    if (!url) {
+        return NextResponse.json({ msg: "Url is missing!" }, { status: 400 });
+    }
+
+    try {
+        const status = await prisma.website.findFirst({
+            where: { url }
+        });
+
+        if (status?.lastStatus !== 200) {
+            return NextResponse.json({ msg: "Your Website is down!" });
+        } else {
+            return NextResponse.json({ msg: "Your Website is working fine!" });
+        }
+    } catch (e) {
+        return NextResponse.json({ msg: "Something went wrong!" }, { status: 500 });
+    }
+}

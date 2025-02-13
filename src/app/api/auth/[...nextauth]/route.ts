@@ -56,7 +56,7 @@ const handler = NextAuth({
         }),
         GoogleProvider({
             clientId : process.env.CLIENT_ID || "",
-            clientSecret : process.env.CLIENT_SECRET || ""
+            clientSecret : process.env.CLIENT_SECRET || "",
         })
         
     ],
@@ -76,6 +76,27 @@ const handler = NextAuth({
             }
             return token;
           },
+        async signIn({user, account}) : any{
+            if(account?.provider === "google"){
+               if(user.email){
+                let existingUser = await prisma.user.findFirst({
+                    where : {
+                        email : user.email
+                    }
+                })
+                if(!existingUser){
+                    existingUser = await prisma.user.create({
+                        data : {
+                            email : user.email,
+                            password : ''
+                        }
+                    })
+                }
+                user.id = existingUser?.id.toString()
+               }
+            }
+            return true;
+        }
     }
 })
 
