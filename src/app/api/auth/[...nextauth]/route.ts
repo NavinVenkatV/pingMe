@@ -2,11 +2,10 @@ import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../../lib/prisma"; // Import the singleton
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
 
-const prisma = new PrismaClient();
 
 const handler = NextAuth({
     providers: [
@@ -82,6 +81,6 @@ const handler = NextAuth({
             return true;
         }
     }
-} as NextAuthOptions); // Add explicit type
+} as NextAuthOptions);
 
 export { handler as GET, handler as POST };

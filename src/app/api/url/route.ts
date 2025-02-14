@@ -1,9 +1,8 @@
 import nodemailer from "nodemailer";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../lib/prisma"; // Import the singleton
 
-const prisma = new PrismaClient();
 const activeJobs = new Map<string, NodeJS.Timeout>();
 
 const transport = nodemailer.createTransport({
