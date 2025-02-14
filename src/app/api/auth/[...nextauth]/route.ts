@@ -2,9 +2,10 @@ import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
-import { prisma } from "../../../lib/prisma"; // Import the singleton
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 
 const handler = NextAuth({

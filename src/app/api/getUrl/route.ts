@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../../lib/prisma"; // Import the singleton
+
 
 export async function GET(req: NextRequest) {
     try {

@@ -38,81 +38,49 @@ export default function Dashboard() {
         }
     }, [session]);
     
-    useEffect(() => {
-        async function fetchUrls() {
-            try {
-                if (!session?.user?.id) return;
-    
-                const res = await axios.get("/api/getUrl", { 
-                    params: { userId: Number(session?.user?.id) } 
-                });
-    
-                if (!res.data.urls || !Array.isArray(res.data.urls)) return;
-                
-                const fetchedUrls = res.data.urls.map(({ url }: { url: string }) => ({ url, status: "Loading..." }));
-                setUrls(fetchedUrls);
-    
-                fetchedUrls.forEach(({ url } : {
-                    url : string
-                }) => {
-                    if (!intervals.current[url]) { // Avoid multiple intervals for the same URL
-                        const interval = setInterval(async () => {
-                            try {
-                                const statusRes = await axios.get("/api/url", { params: { url } });
-                                setUrls(prevUrls =>
-                                    prevUrls.map(u =>
-                                        u.url === url ? { ...u, status: statusRes.data.msg } : u
-                                    )
-                                );
-                            } catch (error) {
-                                console.error("Error fetching status:", error);
-                            }
-                        }, 5000);
-    
-                        intervals.current[url] = interval;
-                    }
-                });
-            } catch (error) {
-                console.error("Error fetching URLs:", error);
-                setUrls([]);
-            }
-        }
-    
-        fetchUrls();
-    
-        return () => {
-            Object.values(intervals.current).forEach(clearInterval); 
-        };
-    }, [session?.user?.id]);
-    
-
-
 
     // useEffect(() => {
     //     if (!session?.user?.id) return;
-
+    
     //     const fetchUrls = async () => {
     //         try {
-    //             let userId = session?.user?.id;
+    //             const userId = session.user.id;
     //             const res = await axios.get('/api/getUrl', { params: { userId } });
-
+    
     //             if (res?.data?.urls) {
-    //                 const urlsWithLoadingStatus = res.data.urls.map(({ url }) => ({ url, status: "Processing..." }));
+    //                 const urlsWithLoadingStatus = res.data.urls.map(({ url, lastStatus }: { url: string; lastStatus: number }) => ({
+    //                     url,
+    //                     status: "Processing...", 
+    //                 }));
     //                 setUrls(urlsWithLoadingStatus);
+    //                 if(urls){
+    //                     urls.map(({url, status} : {url : string, status : string})  => {
+    //                         const interval = setInterval(async () => {
+    //                             try {
+    //                                 const res = await axios.get("/api/url", { params: { url } });
+    //                                 setUrls(prevUrls =>
+    //                                     prevUrls.map(u =>
+    //                                         u.url === url ? { ...u, status: res.data.msg } : u
+    //                                     )
+    //                                 );
+    //                             } catch (error) {
+    //                                 console.error("Error fetching status:", error);
+    //                             }
+    //                         }, 5000);
+                
+    //                         intervals.current[url] = interval;
+    //                     });
+    //                 }
     //             }
     //         } catch (e) {
     //             console.log("Could not fetch URLs: ", e);
     //         }
     //     };
+    
+    //     fetchUrls(); // Correct function call
+    // }, [session?.user?.id]);
+    
 
-    //     fetchUrls();
-    // }, [session]);
-
-    // useEffect(() => {
-    //     return () => {
-    //         Object.values(intervals.current).forEach(clearInterval);
-    //     };
-    // }, []);
 
 
     const handleSubmit = async () => {
@@ -127,11 +95,15 @@ export default function Dashboard() {
             const userId = session?.user?.id;
             if (!userId) return;
 
-            await axios.post("/api/url", { url, userId: Number(userId) });
+            const res = await axios.post('/api/url',{
+                url : url,
+                userId : JSON.parse(userId)
+            })
+
             setUrls(prevUrls => [...prevUrls, { url, status: "Processing.." }]);
             setLoading(false)
             setGifloading(true)
-            setUrl(""); // Clear input
+            setUrl(""); 
 
             const interval = setInterval(async () => {
                 try {
@@ -144,9 +116,9 @@ export default function Dashboard() {
                 } catch (error) {
                     console.error("Error fetching status:", error);
                 }
-            }, 5000);
+            }, 300000);
 
-            intervals.current[url] = interval; // Store reference
+            intervals.current[url] = interval;
         } catch (error) {
             console.error("Error while adding website:", error);
             alert("Something went wrong!");
