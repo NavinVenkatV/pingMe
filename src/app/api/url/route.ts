@@ -45,7 +45,7 @@ const checkWebsite = async ({ url, email, userId }: WebsiteMonitor) => {
             data: { lastStatus: 500, lastCheckedAt: new Date().toISOString() },
         });
 
-        console.log(`${url} is DOWN! Sending alert to ${email}`);
+        console.log(`${url} is DOWN! Sending alert to ${email}`, e);
 
         if (email) sendMail({ url, email });
     }
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (activeJobs.has(url)) {
-        return NextResponse.json({ msg: "Website is already under monitoring!" });
+        return NextResponse.json({ msg: "Website is already under monitoring!" },{ status : 400 });
     }
 
     const job = setInterval(() => checkWebsite({ url, email: user.email, userId }), 5 * 60 * 1000);
@@ -126,6 +126,7 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ msg: "Your Website is working fine!" });
         }
     } catch (e) {
+        console.log(e)
         return NextResponse.json({ msg: "Something went wrong!" }, { status: 500 });
     }
 }

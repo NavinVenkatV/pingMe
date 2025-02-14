@@ -1,5 +1,6 @@
-import { Button } from "./ui/button";
 import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
@@ -10,7 +11,7 @@ export default function Hero() {
 
             <div className="flex flex-col justify-start mt-20 md:mt-12 md:justify-center text-center items-center w-full max-w-[700px]">
                 <div className="flex flex-col justify-center text-center items-center">
-                    <img src="l2.png" alt="title" className="mb-3 md:mb-12" width={150} height={150} />
+                    <Image src="/l2.png" alt="title" className="mb-3 md:mb-12" width={150} height={150} />
                     <div className="lg:text-7xl text-3xl md:text-5xl font-bold">Radically Better Observability Stack</div>
                     <div className="text-gray-500 mt-3 md:mt-7 text-sm md:text-xl w-[300px] md:w-[500px]">Ship higher-quality software faster. Be the hero of your engineering teams.</div>
                 </div>
@@ -30,7 +31,7 @@ export default function Hero() {
                         </button>
                     </div>
                 </div>
-                <div className="mt-7 text-sm text-gray-500">Start monitoring for free or <span><a href="/" className="underline text-gray-400">book a demo</a></span></div>
+                <div className="mt-7 text-sm text-gray-500">Start monitoring for free or <span><Link href="/" className="underline text-gray-400">book a demo</Link></span></div>
             </div>
         </div>
     )

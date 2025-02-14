@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 
 interface NameType {
     name: string;
@@ -9,7 +8,6 @@ interface NameType {
 }
 
 export const Button = ({ name, onSignIn }: NameType) => {
-    const router = useRouter(); 
 
     return (
         <button 

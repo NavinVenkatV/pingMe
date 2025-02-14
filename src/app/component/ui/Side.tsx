@@ -3,6 +3,8 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 
 interface SideProps {
   setIsSideOpen: (isOpen: boolean) => void;
@@ -31,11 +33,11 @@ export const Side = ({ setIsSideOpen }: SideProps) => {
       </div>
 
       <div className="mt-2">
-        <a href="https://github.com/NavinVenkatV/pingMe..git"
+        <Link href="https://github.com/NavinVenkatV/pingMe..git"
           className="px-2 py-1 bg-blue-500 hover:bg-blue-700 rounded-xl text-white transition duration-300 flex justify-center items-center"
         >
           GitHub
-        </a>
+        </Link>
       </div>
 
       <div className="w-full flex items-center justify-center mt-3">
@@ -53,7 +55,7 @@ export const Side = ({ setIsSideOpen }: SideProps) => {
 
       {session?.user?.image && (
         <div className="mt-3 flex justify-center">
-          <img src={imgUrl} alt="Profile" className="w-9 h-9 rounded-full cursor-pointer" />
+          <Image width={30} height={30} src={imgUrl} alt="Profile" className="w-9 h-9 rounded-full cursor-pointer" />
         </div>
       )}
     </div>

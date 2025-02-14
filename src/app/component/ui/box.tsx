@@ -1,4 +1,4 @@
-export const Box = ({url, status} : {
+export const Box = ({url} : {
     url    : string,
     status : boolean
 })=>{

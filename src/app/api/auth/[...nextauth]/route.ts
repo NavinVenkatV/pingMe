@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 import { PrismaClient } from "@prisma/client";
-import bcrypt, { compare } from "bcrypt"
+import bcrypt from "bcrypt"
 
 const prisma = new PrismaClient();
 

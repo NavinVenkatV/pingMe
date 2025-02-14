@@ -24,23 +24,23 @@ export default function Slide() {
     )
 }
 
-function Slider({ img, left, progress, direction }: any) {
+function Slider({ left, progress, direction } : any) {
     const dir = direction === "left" ? -1 : 1;
     const x = useTransform(progress, [0, 1], [-250 * dir, 250 * dir])
     return (
         <motion.div 
         className="flex whitespace-nowrap relative"
         style={{left : left, x}}>
-            <Phrase src={img} />
-            <Phrase src={img} />
-            <Phrase src={img} />
-            <Phrase src={img} />
-            <Phrase src={img} />
+            <Phrase  />
+            <Phrase  />
+            <Phrase />
+            <Phrase />
+            <Phrase  />
         </motion.div>
     )
 }
 
-function Phrase({ src }: any) {
+function Phrase() {
     return (
         <div className="flex gap-5 items-center px-2 md:px-5 lg:px-10  text-slate-400">
             <div className="text-[5vw]">Never Miss a Downtime Again!!!</div>

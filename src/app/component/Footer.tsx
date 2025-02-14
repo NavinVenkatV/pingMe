@@ -1,8 +1,9 @@
 import { GiBlackHandShield } from "react-icons/gi";
-import { Link } from "./ui/Link";
+import { Links } from "./ui/Link";
 import { Logo } from "./ui/Logo";
 import { TiSocialLinkedin, TiSocialTwitter } from "react-icons/ti";
 import { FaInstagram, FaGithub } from "react-icons/fa";
+import Link from "next/link";
 
 
 export const Footer = () => {
@@ -24,24 +25,24 @@ export const Footer = () => {
                     <div className="hidden md:block">
                     <div className="w-full h-full flex flex-col items-center justify-center">pingMeBuisness@gmail.com</div>
                     </div>
-                    <a href="linkedin.com/in/navin-venkat-38bb28279" className="flex flex-col items-center justify-center">
+                    <Link href="linkedin.com/in/navin-venkat-38bb28279" className="flex flex-col items-center justify-center">
                         <TiSocialLinkedin />
-                    </a>
-                    <a href="https://x.com/nav_venk"  className="flex flex-col items-center justify-center">
+                    </Link>
+                    <Link href="https://x.com/nav_venk"  className="flex flex-col items-center justify-center">
                         <TiSocialTwitter />
-                    </a>
-                    <a href="https://www.instagram.com/navin.pinkman/" className="flex flex-col items-center justify-center">
+                    </Link>
+                    <Link href="https://www.instagram.com/navin.pinkman/" className="flex flex-col items-center justify-center">
                         <FaInstagram />
-                    </a>
-                    <a href="https://github.com/NavinVenkatV/pingMe..git" className="flex flex-col items-center justify-center">
+                    </Link>
+                    <Link href="https://github.com/NavinVenkatV/pingMe..git" className="flex flex-col items-center justify-center">
                         <FaGithub />
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className="md:flex justify-between mt-3 text-xs md:text-sm">
                 <div className="flex items-center justify-center gap-2 ">
-                    <Link name="Terms of Use" href="/" />
-                    <Link name="Privacy Policy" href="/" />
+                    <Links name="Terms of Use" href="/" />
+                    <Links name="Privacy Policy" href="/" />
                 </div>
                 <div className="flex items-center justify-center gap-2 mt-3 md:mt-0">
                     @2025 pingMe, Inc

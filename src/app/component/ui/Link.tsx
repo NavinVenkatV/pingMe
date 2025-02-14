@@ -1,4 +1,4 @@
-export const Link = ({name, href} : {
+export const Links = ({name, href} : {
     name : string,
     href : string
 })=>{

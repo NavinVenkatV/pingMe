@@ -11,6 +11,7 @@ import { BsTrash3Fill } from "react-icons/bs";
 import { Spinner } from "../component/ui/spinner";
 import Slide from "../component/Slide";
 import { Side } from "../component/ui/Side";
+import Image from "next/image";
 
 
 
@@ -175,7 +176,7 @@ export default function Dashboard() {
         <div className={`overflow-hidden pb-3 text-white ${font.className} relative z-0`}>
             {gifloading && <div className="= z-50 w-full flex justify-center items-center mt-4 fixed px-2">
                 <div className="w-[350px] h-[350px] p-4 text-neutral-700 bg-white rounded-2xl">
-                    <img src="gif/minions.gif" alt="Funny gif" className="rounded-xl" />
+                    <Image width={500} height={500} src="/gif/minions.gif" alt="Funny gif" className="rounded-xl" />
                     <div className="mt-3 text-center te">Successfully Added your Website to pingMe</div>
                     <button onClick={() => {
                         setGifloading(false)
@@ -185,7 +186,7 @@ export default function Dashboard() {
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
             <div className="w-screen min-h-screen flex justify-center p-5">
                 <div className="flex flex-col items-center justify-center w-full max-w-[700px] px-5 rounded-lg">
-                    <img src="gif/leo.gif" alt="Hero fig" className="rounded-xl" />
+                    <Image width={500} height={500} src="/gif/leo.gif" alt="Hero fig" className="rounded-xl" />
                     <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center text-slate-400 mt-5">
                         pingMe - Your Website Monitoring Solution
                     </div>

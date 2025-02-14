@@ -6,6 +6,8 @@ import { twMerge } from "tailwind-merge";
 import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
 import { SiGithub, SiTiktok, SiYoutube } from "react-icons/si";
 import { SlSocialTwitter } from "react-icons/sl";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function RevealBento(){
     return (
@@ -64,23 +66,18 @@ const Block = ({ className, ...rest }: BlockProps) => {
 
 const HeaderBlock = () => (
   <Block className="col-span-12 row-span-2 md:col-span-6">
-    <img
-      src="https://api.dicebear.com/8.x/lorelei-neutral/svg?seed=John"
-      alt="avatar"
-      className="mb-4 size-14 rounded-full"
-    />
     <h1 className="mb-12 text-xl md:text-2xl lg:text-3xl font-medium leading-tight">
       pingMe.{" "}
       <span className="text-gray-500">
       Ship higher-quality software faster.
       </span>
     </h1>
-    <a
+    <Link
       href="#"
       className="flex items-center gap-1 text-red-300 hover:underline"
     >
       Contact me <FiArrowRight />
-    </a>
+    </Link>
   </Block>
 );
 
@@ -93,12 +90,12 @@ const SocialsBlock = () => (
       }}
       className="col-span-6  md:col-span-3"
     >
-      <a
+      <Link
         href="#"
         className="grid h-full place-content-center text-3xl text-white"
       >
         <SiYoutube />
-      </a>
+      </Link>
     </Block>
     <Block
       whileHover={{
@@ -107,12 +104,12 @@ const SocialsBlock = () => (
       }}
       className="col-span-6  md:col-span-3"
     >
-      <a
+      <Link
         href="#"
         className="grid h-full place-content-center text-3xl text-white"
       >
         <SiGithub />
-      </a>
+      </Link>
     </Block>
     <Block
       whileHover={{
@@ -121,12 +118,12 @@ const SocialsBlock = () => (
       }}
       className="col-span-6 bg-zinc-50 md:col-span-3"
     >
-      <a
+      <Link
         href="#"
         className="grid h-full place-content-center text-3xl text-black"
       >
         <SiTiktok />
-      </a>
+      </Link>
     </Block>
     <Block
       whileHover={{
@@ -135,12 +132,12 @@ const SocialsBlock = () => (
       }}
       className="col-span-6 bg-blue-500 md:col-span-3"
     >
-      <a
+      <Link
         href="#"
         className="grid h-full place-content-center text-3xl text-white"
       >
         <SlSocialTwitter />
-      </a>
+      </Link>
     </Block>
   </>
 );
