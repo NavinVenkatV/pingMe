@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
         if (!getUrl) {
             return NextResponse.json({ msg: "Website not found!" }, { status: 404 });
         }
-        const detailedUrls =  getUrl.websites.map(({url, lastStatus}) => ({
+        const detailedUrls =  getUrl.websites.map(({url, lastStatus}) : {url : string, lastStatus : number} => ({
             url,
             lastStatus 
         }))
