@@ -6,7 +6,6 @@ import { twMerge } from "tailwind-merge";
 import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
 import { SiGithub, SiTiktok, SiYoutube } from "react-icons/si";
 import { SlSocialTwitter } from "react-icons/sl";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function RevealBento(){

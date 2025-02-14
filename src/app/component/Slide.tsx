@@ -16,15 +16,15 @@ export default function Slide() {
     return (
         <div className="overflow-hiddeen my-5 md:my-10 lg:my-44">
             <div ref={containerRef}>
-                <Slider img='/b1.webp' left={'-80%'} progress={scrollYProgress} direction="left"/>
-                <Slider img='/b2.webp' left={'-60%'} progress={scrollYProgress} direction="right"/>
+                <Slider  left={'-80%'} progress={scrollYProgress} direction="left"/>
+                <Slider  left={'-60%'} progress={scrollYProgress} direction="right"/>
                 {/* <Slider img='/b3.webp' left={'-75%'} progress={scrollYProgress} direction="left"/> */}
             </div>
         </div>
     )
 }
 
-function Slider({ left, progress, direction } : any) {
+function Slider({ left, progress, direction } : { left : string, progress : any, direction : string}) {
     const dir = direction === "left" ? -1 : 1;
     const x = useTransform(progress, [0, 1], [-250 * dir, 250 * dir])
     return (
