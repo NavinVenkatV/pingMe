@@ -27,17 +27,14 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="relative min-h-screen">
-      {/* Main Content */}
-      <Header setIsSideOpen={setIsSideOpen} />
-      
-      {/* Sidebar (Rendered at Root Level) */}
+    <div className="relative min-h-screen overflow-hidden">
+      <Header setIsSideOpen={setIsSideOpen} />   
+      <img src="mainImage/pingMeF.jpg" alt="Hero_section_image" className="absolute z-0" />   
       {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />} 
-
-      {/* Other Components */}
       <Hero />
       <RevealBento />
       <Middle />
+      <Slide/>
       <Middle2 />
       <Footer />
     </div>

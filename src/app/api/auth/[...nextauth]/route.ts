@@ -62,11 +62,9 @@ const handler = NextAuth({
     ],
     secret : process.env.NEXTAUTH_SECRET,
     callbacks : {
-        async redirect({url, baseUrl}){
-            return "/dashboard"
-        },
+        
         async session({session, token} : any){
-            session.user.id = token.sub;
+            session.user.id = token.id;
             session.user.image = token.picture
             return session;
         },
@@ -76,7 +74,7 @@ const handler = NextAuth({
             }
             return token;
           },
-        async signIn({user, account}) : any{
+        async signIn({user, account}){
             if(account?.provider === "google"){
                if(user.email){
                 let existingUser = await prisma.user.findFirst({
