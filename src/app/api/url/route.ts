@@ -80,10 +80,6 @@ export async function POST(req: NextRequest) {
         });
     }
 
-    if (activeJobs.has(url)) {
-        return NextResponse.json({ msg: "Website is already under monitoring!" },{ status : 400 });
-    }
-
     const job = setInterval(() => checkWebsite({ url, email: user.email, userId }), 5 * 60 * 1000);
     activeJobs.set(url, job);
 
@@ -94,20 +90,23 @@ export async function POST(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
     const { url, userId } = await req.json();
 
-    if (activeJobs.has(url)) {
-        await prisma.website.delete({
-            where : {
-                url,
-                userId
-            }
-        })
-        clearInterval(activeJobs.get(url));
-        activeJobs.delete(url);
-        return NextResponse.json({ msg: "pingMe stopped monitoring your website!" });
-    }
+        try{
+            await prisma.website.delete({
+                where : {
+                    url,
+                    userId
+                }
+            })
+            clearInterval(activeJobs.get(url));
+            activeJobs.delete(url);
+            return NextResponse.json({ msg: "pingMe stopped monitoring your website!" });
+        }catch(e){
+            return NextResponse.json({ msg: "Website is not found in active monitoring!" });
+        }
+    
 
-    return NextResponse.json({ msg: "Website is not found in active monitoring!" });
 }
+
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const url = searchParams.get('url');
