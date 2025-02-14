@@ -4,6 +4,8 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt"
+import { JWT } from "next-auth/jwt";
+import type { Session } from "next-auth";
 
 const prisma = new PrismaClient();
 
@@ -63,8 +65,10 @@ const handler = NextAuth({
     secret : process.env.NEXTAUTH_SECRET,
     callbacks : {
         
-        async session({session, token} : any){
-            session.user.id = token.id;
+        async session({session, token} : {
+            session : any, token : JWT
+        }){
+            session.user.id = token.id
             session.user.image = token.picture
             return session;
         },

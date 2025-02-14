@@ -19,8 +19,12 @@ export async function GET(req: NextRequest) {
         if (!getUrl) {
             return NextResponse.json({ msg: "Website not found!" }, { status: 404 });
         }
+        const detailedUrls =  getUrl.websites.map(({url, lastStatus}) => ({
+            url,
+            lastStatus 
+        }))
 
-        return NextResponse.json({ urls : getUrl.websites });
+        return NextResponse.json({ urls : detailedUrls });
     } catch (error) {
         console.error("Error fetching user URLs:", error);
         return NextResponse.json({ msg: "Something went wrong!" }, { status: 500 });

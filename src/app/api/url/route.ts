@@ -45,7 +45,7 @@ const checkWebsite = async ({ url, email, userId }: WebsiteMonitor) => {
             data: { lastStatus: 500, lastCheckedAt: new Date().toISOString() },
         });
 
-        console.log(`${url} is DOWN! Sending alert to ${email}`, e);
+        console.log(`${url} is DOWN! Sending alert to ${email}`);
 
         if (email) sendMail({ url, email });
     }
@@ -126,7 +126,6 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ msg: "Your Website is working fine!" });
         }
     } catch (e) {
-        console.log(e)
         return NextResponse.json({ msg: "Something went wrong!" }, { status: 500 });
     }
 }

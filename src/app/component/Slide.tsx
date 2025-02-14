@@ -1,6 +1,6 @@
 "use client"
 
-import { useScroll, useTransform } from "framer-motion"
+import { MotionValue, useScroll, useTransform } from "framer-motion"
 import  {useRef}  from "react";
 import {motion} from "framer-motion"
 
@@ -24,7 +24,7 @@ export default function Slide() {
     )
 }
 
-function Slider({ left, progress, direction } : { left : string, progress : any, direction : string}) {
+function Slider({ left, progress, direction } : { left : string, progress : MotionValue<number>, direction : string}) {
     const dir = direction === "left" ? -1 : 1;
     const x = useTransform(progress, [0, 1], [-250 * dir, 250 * dir])
     return (
