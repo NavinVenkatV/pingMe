@@ -12,19 +12,20 @@ export async function GET(req: NextRequest) {
         }
 
         const getUrl = await prisma.user.findUnique({
-            where: { id:  Number(userId) },
-            include: { websites : true }, 
+            where: { id: Number(userId) },
+            include: { websites: true },
         });
 
         if (!getUrl) {
             return NextResponse.json({ msg: "Website not found!" }, { status: 404 });
         }
-        const detailedUrls =  getUrl.websites.map(({url, lastStatus}) : {url : string, lastStatus : number} => ({
-            url,
-            lastStatus 
-        }))
 
-        return NextResponse.json({ urls : detailedUrls });
+        const detailedUrls = getUrl.websites.map((website: { url: string; lastStatus: number }) => ({
+            url: website.url,
+            lastStatus: website.lastStatus,
+        }));
+
+        return NextResponse.json({ urls: detailedUrls });
     } catch (error) {
         console.error("Error fetching user URLs:", error);
         return NextResponse.json({ msg: "Something went wrong!" }, { status: 500 });
