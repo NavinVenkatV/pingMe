@@ -36,7 +36,7 @@ export default function Dashboard() {
         if (status !== "loading" && status === "unauthenticated") {
             router.push("/");
         }
-    }, [session]);
+    }, [session?.user.id]);
     
     // useEffect(() => {
     //     async function fetchUrls() {
@@ -133,7 +133,7 @@ export default function Dashboard() {
             const userId = session?.user?.id;
             if (!userId) return;
 
-            const res = await axios.delete("/api/url", { data: { url: deleteUrl, userID: Number(userId) } });
+            await axios.delete("/api/url", { data: { url: deleteUrl, userID: Number(userId) } });
 
             setUrls(prevUrls => prevUrls.filter(u => u.url !== deleteUrl));
 
