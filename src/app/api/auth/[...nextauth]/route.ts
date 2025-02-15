@@ -4,8 +4,8 @@ import GoogleProvider from "next-auth/providers/google";
 
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import {prisma} from "@/app/lib/prisma"
+
 
 
 const handler = NextAuth({
