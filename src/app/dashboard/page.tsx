@@ -125,7 +125,6 @@ export default function Dashboard() {
             intervals.current[url] = interval; // Store reference
         } catch (error) {
             console.error("Error while adding website:", error);
-            alert(error);
         }
     };
 
@@ -135,7 +134,6 @@ export default function Dashboard() {
             if (!userId) return;
 
             const res = await axios.delete("/api/url", { data: { url: deleteUrl, userID: Number(userId) } });
-            alert(JSON.stringify(res.data.msg));
 
             setUrls(prevUrls => prevUrls.filter(u => u.url !== deleteUrl));
 
@@ -145,7 +143,6 @@ export default function Dashboard() {
             }
         } catch (error) {
             console.error("Error deleting website:", error);
-            alert("Failed to delete URL!");
         }
     };
 
