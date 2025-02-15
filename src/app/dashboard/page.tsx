@@ -85,6 +85,8 @@ export default function Dashboard() {
     //     };
     // }, [session?.user?.id]);
 
+    useEffect
+
 
 
     const handleSubmit = async () => {
@@ -106,11 +108,11 @@ export default function Dashboard() {
             setUrls(prevUrls => [...prevUrls, { url, status: "Processing.." }]);
             setLoading(false)
             setGifloading(true)
-            setUrl(""); // Clear input
-
+            let paramUrl = url;
+            setUrl("");
             const interval = setInterval(async () => {
                 try {
-                    const res = await axios.get("/api/url", { params: { url } });
+                    const res = await axios.get("/api/url", { params:{paramUrl} });
                     setUrls(prevUrls =>
                         prevUrls.map(u =>
                             u.url === url ? { ...u, status: res.data.msg } : u
@@ -134,7 +136,7 @@ export default function Dashboard() {
             if (!userId) return;
 
             const res = await axios.delete("/api/url", { data: { url: deleteUrl, userID: Number(userId) } });
-            alert(res);
+            alert(JSON.stringify(res.data.msg));
 
             setUrls(prevUrls => prevUrls.filter(u => u.url !== deleteUrl));
 

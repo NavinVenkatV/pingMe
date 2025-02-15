@@ -109,7 +109,7 @@ export async function DELETE(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
-    const url = searchParams.get('url');
+    const url = searchParams.get('paramUrl');
     
     if (!url) {
         return NextResponse.json({ msg: "Url is missing!" }, { status: 400 });
@@ -119,6 +119,9 @@ export async function GET(req: NextRequest) {
         const status = await prisma.website.findFirst({
             where: { url }
         });
+        if(!status){
+            return NextResponse.json({msg : "Website not found!"})
+        }
 
         if (status?.lastStatus !== 200) {
             return NextResponse.json({ msg: "Your Website is down!" });
