@@ -85,7 +85,6 @@ export default function Dashboard() {
     //     };
     // }, [session?.user?.id]);
 
-    useEffect
 
 
 
@@ -108,7 +107,7 @@ export default function Dashboard() {
             setUrls(prevUrls => [...prevUrls, { url, status: "Processing.." }]);
             setLoading(false)
             setGifloading(true)
-            let paramUrl = url;
+            const paramUrl = url;
             setUrl("");
             const interval = setInterval(async () => {
                 try {

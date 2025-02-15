@@ -101,6 +101,7 @@ export async function DELETE(req: NextRequest) {
             activeJobs.delete(url);
             return NextResponse.json({ msg: "pingMe stopped monitoring your website!" });
         }catch(e){
+            console.log(e)
             return NextResponse.json({ msg: "Website is not found in active monitoring!" });
         }
     
@@ -129,7 +130,7 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ msg: "Your Website is working fine!" });
         }
     } catch (e) {
-        console.log(e)
+        console.log("Something went wrong!",e)
         return NextResponse.json({ msg: "Something went wrong!" }, { status: 500 });
     }
 }
