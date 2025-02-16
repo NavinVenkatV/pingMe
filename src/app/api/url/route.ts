@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import {prisma} from "@/lib/prisma"
+import { AxiosError } from 'axios';
 
 const activeJobs = new Map<string, NodeJS.Timeout>();
 
@@ -47,22 +48,24 @@ const checkWebsite = async ({ url, email, userId }: WebsiteMonitor) => {
         });
 
         console.log(`${url} is UP with status ${res.status}`);
-    } catch (e: any) {
+    } catch (error) {
         let errorStatus = 500;
         let errorMessage = "Unknown error";
 
-        if (e.code === 'EAI_AGAIN') {
-            errorStatus = 503;
-            errorMessage = "DNS lookup failed - domain may be invalid or DNS servers are not responding";
-        } else if (e.code === 'ECONNREFUSED') {
-            errorStatus = 503;
-            errorMessage = "Connection refused by the server";
-        } else if (e.response) {
-            errorStatus = e.response.status;
-            errorMessage = `HTTP error: ${e.response.status}`;
-        } else if (e.code === 'ECONNABORTED') {
-            errorStatus = 504;
-            errorMessage = "Request timed out";
+        if (error instanceof AxiosError) {
+            if (error.code === 'EAI_AGAIN') {
+                errorStatus = 503;
+                errorMessage = "DNS lookup failed - domain may be invalid or DNS servers are not responding";
+            } else if (error.code === 'ECONNREFUSED') {
+                errorStatus = 503;
+                errorMessage = "Connection refused by the server";
+            } else if (error.response) {
+                errorStatus = error.response.status;
+                errorMessage = `HTTP error: ${error.response.status}`;
+            } else if (error.code === 'ECONNABORTED') {
+                errorStatus = 504;
+                errorMessage = "Request timed out";
+            }
         }
 
         await prisma.website.updateMany({
