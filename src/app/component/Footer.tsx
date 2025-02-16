@@ -34,7 +34,7 @@ export const Footer = () => {
                     <Link href="https://www.instagram.com/navin.pinkman/" className="flex flex-col items-center justify-center">
                         <FaInstagram />
                     </Link>
-                    <Link href="https://github.com/NavinVenkatV/pingMe..git" className="flex flex-col items-center justify-center">
+                    <Link href="https://github.com/NavinVenkatV/pingMe" className="flex flex-col items-center justify-center">
                         <FaGithub />
                     </Link>
                 </div>
