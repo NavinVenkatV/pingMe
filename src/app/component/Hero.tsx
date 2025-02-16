@@ -2,6 +2,7 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Hero() {
     const { data : session } = useSession();
@@ -12,8 +13,16 @@ export default function Hero() {
             <div className="flex flex-col justify-start mt-20 md:mt-12 md:justify-center text-center items-center w-full max-w-[700px]">
                 <div className="flex flex-col justify-center text-center items-center">
                     <Image src="/l2.png" alt="title" className="mb-3 md:mb-12" width={150} height={150} />
-                    <div className="lg:text-7xl text-3xl md:text-5xl font-bold">Radically Better Observability Stack</div>
-                    <div className="text-gray-500 mt-3 md:mt-7 text-sm md:text-xl w-[300px] md:w-[500px]">Ship higher-quality software faster. Be the hero of your engineering teams.</div>
+                    <motion.div
+                    initial={{ opacity: 0, y: -70 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                     className="lg:text-7xl text-3xl md:text-5xl font-bold">Never Miss a Downtime Again!!!</motion.div>
+                    <motion.div
+                    initial={{ opacity: 0, y: 70 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                     className="text-gray-500 mt-3 md:mt-7 text-sm md:text-xl w-[300px] md:w-[500px]"> PingMe is a tool that helps you monitor your website and get notified when it goes down. </motion.div>
                 </div>
                 <div className="flex mt-8 px-5 w-full justify-center">
                     <div className=" mt-3 gap-3 px-3 w-[200px] md:w-[250px] lg:w-[300px]">

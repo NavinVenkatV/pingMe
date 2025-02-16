@@ -4,17 +4,29 @@ import Image from "next/image";
 export const Middle = () => {
     return (
         <div className="text-white p-6 md:p-10">
-            <div className="text-3xl md:text-5xl text-center">
+            <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}   
+            className="text-3xl md:text-5xl text-center">
                 <span className="text-blue-500">pingMe</span> to Monitor your Business!
-            </div>
+            </motion.div>
             <div className="relative flex flex-col md:flex-row items-center justify-center mt-10 gap-6">
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl"
+                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl overflow-hidden"
                 >
-                    <Image width={800} height={800} src="/slide/s1.png" alt="image1" className="w-full p-3 h-full object-cover rounded-xl" />
+                    <Image 
+                        width={500}
+                        height={500}
+                        src="/slide/s1.png"
+                        alt="Website monitoring dashboard"
+                        className="w-full h-full object-contain p-3"
+                        priority
+                        quality={90}
+                    />
                 </motion.div>
 
                 <div className="w-full sm:w-[300px] h-auto md:h-[500px] flex flex-col text-slate-400  items-center justify-center p-4 md:p-6 rounded-xl ">
@@ -30,9 +42,17 @@ export const Middle = () => {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl"
+                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl overflow-hidden"
                 >
-                    <Image width={800} height={800} src="/slide/s2.jpg" alt="image2" className="w-full h-full object-cover rounded-xl" />
+                    <Image 
+                        width={500}
+                        height={500}
+                        src="/slide/s2.jpg"
+                        alt="Performance analytics visualization"
+                        className="w-full h-full object-contain"
+                        priority
+                        quality={90}
+                    />
                 </motion.div>
             </div>
         </div>
@@ -42,18 +62,30 @@ export const Middle = () => {
 
 export const Middle2 = () => {
     return (
-        <div className="text-white p-6 md:p-10">
-            <div className="text-3xl md:text-5xl text-center">
+        <div className="text-white p-6 md:p-10 mt-10">
+            <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}      
+            className="text-3xl md:text-5xl text-center">
                 Ship <span className="text-blue-500">Higher-Quality</span> Software Faster
-            </div>
+            </motion.div>
             <div className="relative flex flex-col md:flex-row items-center justify-center mt-10 gap-6">
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl"
+                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl overflow-hidden"
                 >
-                    <Image width={800} height={800} src="/slide/s1.png" alt="image1" className="w-full h-full object-cover rounded-xl" />
+                    <Image 
+                        width={500}
+                        height={500}
+                        src="/slide/s1.png"
+                        alt="Website monitoring dashboard"
+                        className="w-full h-full object-contain p-3"
+                        priority
+                        quality={90}
+                    />
                 </motion.div>
 
                 <div className="w-full sm:w-[300px] h-auto md:h-[500px] flex flex-col text-slate-400  items-center justify-center p-4 md:p-6 rounded-xl ">
@@ -70,9 +102,17 @@ export const Middle2 = () => {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl"
+                    className="w-full sm:w-[400px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center rounded-xl overflow-hidden"
                 >
-                    <Image width={800} height={800} src="/slide/s2.jpg" alt="image2" className="w-full h-full object-cover rounded-xl" />
+                    <Image 
+                        width={500}
+                        height={500}
+                        src="/slide/s2.jpg"
+                        alt="Performance analytics visualization"
+                        className="w-full h-full object-contain"
+                        priority
+                        quality={90}
+                    />
                 </motion.div>
             </div>
         </div>

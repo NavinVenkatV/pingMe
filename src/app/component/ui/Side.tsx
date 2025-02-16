@@ -5,6 +5,7 @@ import { Button } from "./button";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface SideProps {
   setIsSideOpen: (isOpen: boolean) => void;
@@ -16,7 +17,11 @@ export const Side = ({ setIsSideOpen }: SideProps) => {
   const imgUrl = session?.user?.image || "";
 
   return (
-    <div className="fixed top-3 right-0 w-[200px] h-auto bg-white shadow-lg rounded-xl p-4 z-50">
+    <motion.div
+    initial = {{x:100}}
+    animate = {{x:0}}
+    transition = {{duration:0.5, ease:"easeInOut"}}
+     className="fixed top-3 right-0 w-[200px] h-auto bg-white shadow-lg rounded-xl p-4 z-50">
       {/* Close Button */}
       <div className="flex justify-end">
         <button 
@@ -58,6 +63,6 @@ export const Side = ({ setIsSideOpen }: SideProps) => {
           <Image width={30} height={30} src={imgUrl} alt="Profile" className="w-9 h-9 rounded-full cursor-pointer" />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };

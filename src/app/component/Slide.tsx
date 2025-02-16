@@ -14,7 +14,7 @@ export default function Slide() {
     })
     
     return (
-        <div className="overflow-hiddeen my-5 md:my-10 lg:my-44">
+        <div className="overflow-hiddeen mb-10 md:mb-20">
             <div ref={containerRef}>
                 <Slider  left={'-80%'} progress={scrollYProgress} direction="left"/>
                 <Slider  left={'-60%'} progress={scrollYProgress} direction="right"/>
@@ -42,8 +42,8 @@ function Slider({ left, progress, direction } : { left : string, progress : Moti
 
 function Phrase() {
     return (
-        <div className="flex gap-5 items-center px-2 md:px-5 lg:px-10  text-slate-400">
-            <div className="text-[12vw]">Never Miss a Downtime Again!!!</div>
+        <div className="flex items-center px-2 md:px-5 lg:px-10  text-slate-400">
+            <div className="text-[5vw]">Never Miss a Downtime Again!!!</div>
             {/* <span className="relative h-[5vw] aspect-[4/2] rounded-full overflow-hidden">
                 <Image style={{ objectFit: "cover" }} src={src} alt="image" fill />
             </span> */}

@@ -12,6 +12,7 @@ import { Spinner } from "../component/ui/spinner";
 import Slide from "../component/Slide";
 import { Side } from "../component/ui/Side";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 
 
@@ -38,52 +39,52 @@ export default function Dashboard() {
         }
     }, [session?.user.id]);
     
-    // useEffect(() => {
-    //     async function fetchUrls() {
-    //         try {
-    //             if (!session?.user?.id) return;
-    
-    //             const res = await axios.get("/api/getUrl", { 
-    //                 params: { userId: Number(session?.user?.id) } 
-    //             });
-    
-    //             if (!res.data.urls || !Array.isArray(res.data.urls)) return;
+    useEffect(() => {
+        async function fetchUrls() {
+            try {
+                if (!session?.user?.id) return;
+
+                const res = await axios.get("/api/getUrl", { 
+                    params: { userId: Number(session?.user?.id) } 
+                });
+
+                if (!res.data.urls || !Array.isArray(res.data.urls)) return;
                 
-    //             const fetchedUrls = res.data.urls.map(({ url }: { url: string }) => ({ url, status: "Loading..." }));
-    //             setUrls(fetchedUrls);
-    
-    //             fetchedUrls.forEach(({ url } : {
-    //                 url : string
-    //             }) => {
-    //                 if (!intervals.current[url]) { // Avoid multiple intervals for the same URL
-    //                     const interval = setInterval(async () => {
-    //                         try {
-    //                             const statusRes = await axios.get("/api/url", { params: { url } });
-    //                             setUrls(prevUrls =>
-    //                                 prevUrls.map(u =>
-    //                                     u.url === url ? { ...u, status: statusRes.data.msg } : u
-    //                                 )
-    //                             );
-    //                         } catch (error) {
-    //                             console.error("Error fetching status:", error);
-    //                         }
-    //                     }, 5000);
-    
-    //                     intervals.current[url] = interval;
-    //                 }
-    //             });
-    //         } catch (error) {
-    //             console.error("Error fetching URLs:", error);
-    //             setUrls([]);
-    //         }
-    //     }
-    
-    //     fetchUrls();
-    
-    //     return () => {
-    //         Object.values(intervals.current).forEach(clearInterval); 
-    //     };
-    // }, [session?.user?.id]);
+                const fetchedUrls = res.data.urls.map(({ url }: { url: string }) => ({ url, status: "Loading..." }));
+                setUrls(fetchedUrls);
+
+                fetchedUrls.forEach(({ url } : { url : string }) => {
+                    if (!intervals.current[url]) {
+                        const interval = setInterval(async () => {
+                            try {
+                                const statusRes = await axios.get("/api/url", { 
+                                    params: { paramUrl: url } // Updated to match handleSubmit parameter name
+                                });
+                                setUrls(prevUrls =>
+                                    prevUrls.map(u =>
+                                        u.url === url ? { ...u, status: statusRes.data.msg } : u
+                                    )
+                                );
+                            } catch (error) {
+                                console.error("Error fetching status:", error);
+                            }
+                        }, 5000);
+
+                        intervals.current[url] = interval;
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching URLs:", error);
+                setUrls([]);
+            }
+        }
+
+        fetchUrls();
+
+        return () => {
+            Object.values(intervals.current).forEach(clearInterval); 
+        };
+    }, [session?.user?.id]);
 
 
 
@@ -148,22 +149,33 @@ export default function Dashboard() {
 
     return (
         <div className={`overflow-hidden pb-3 text-white ${font.className} relative z-0`}>
-            {gifloading && <div className="= z-50 w-full flex justify-center items-center mt-4 fixed px-2">
+            {gifloading &&
+             <motion.div
+             initial={{ opacity: 0, z: 50 }}
+             animate={{ opacity: 1, z: 0 }}
+             transition={{ duration: 0.5, ease: "easeInOut" }}  
+             exit={{ opacity: 0, z: -50 }}
+              className="= z-50 w-full flex justify-center items-center mt-4 fixed px-2">
                 <div className="w-[350px] h-[350px] p-4 text-neutral-700 bg-white rounded-2xl">
                     <Image width={500} height={500} src="/gif/minions.gif" alt="Funny gif" className="rounded-xl" />
                     <div className="mt-3 text-center te">Successfully Added your Website to pingMe</div>
                     <button onClick={() => {
                         setGifloading(false)
                     }} className="w-full rounded-xl px-3 py-2 bg-blue-500 text-black mt-4 hover:bg-blue-700 transition-all duration-300">Close</button>
-                </div></div>}
+                </div>
+            </motion.div>}
             <Header setIsSideOpen={setIsSideOpen} />
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
             <div className="w-screen min-h-screen flex justify-center p-5">
                 <div className="flex flex-col items-center justify-center w-full max-w-[700px] px-5 rounded-lg">
                     <Image width={500} height={500} src="/gif/leo.gif" alt="Hero fig" className="rounded-xl" />
-                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center text-slate-400 mt-5">
+                    <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                     className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center text-slate-400 mt-5">
                         pingMe - Your Website Monitoring Solution
-                    </div>
+                    </motion.div>
                     <div className="text-red-700 text-xs md:text-lg w-full text-center">Note: You will recieve Mail at the time of your Website downtime!</div>
                     <div className="mt-10 w-full flex justify-center items-center gap-2">
                         <div className="md:flex items-center justify-center gap-2 w-full">
@@ -183,7 +195,11 @@ export default function Dashboard() {
                     </div>
 
                     {urls.length > 0 && (
-                        <div className="mt-5 px-auto lg:w-[900px] w-auto">
+                        <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                         className="mt-5 px-auto lg:w-[900px] w-auto">
                             {urls.map(({ url: itemUrl, status }) => (
                                 <div key={Random()} className="bg-[rgba(17,17,29,0.8)] text-white p-3 mt-2 rounded-xl md:flex justify-between">
                                     <div className="flex flex-col text-sm md:text-xl items-center justify-center text-blue-500 font-bold">{itemUrl}</div>
@@ -200,7 +216,7 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                             ))}
-                        </div>
+                        </motion.div>
                     )}
                 </div>
             </div>
