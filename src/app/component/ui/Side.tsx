@@ -38,7 +38,7 @@ export const Side = ({ setIsSideOpen }: SideProps) => {
       </div>
 
       <div className="mt-2">
-        <Link href="https://github.com/NavinVenkatV/pingMe..git"
+        <Link href="https://github.com/NavinVenkatV/pingMe"
           className="px-2 py-1 bg-[rgb(118,48,128)] hover:bg-[rgb(74,18,75)] rounded-xl text-white transition duration-300 flex justify-center items-center"
         >
           GitHub
