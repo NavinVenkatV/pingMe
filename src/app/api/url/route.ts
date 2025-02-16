@@ -19,6 +19,7 @@ interface WebsiteMonitor {
     userId: number;
 }
 
+
 function sendMail({ url, email }: { url: string; email: string }) {
     transport.sendMail({
         from: process.env.EMAIL_USER,

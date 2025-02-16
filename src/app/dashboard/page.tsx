@@ -164,6 +164,7 @@ export default function Dashboard() {
                     <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center text-slate-400 mt-5">
                         pingMe - Your Website Monitoring Solution
                     </div>
+                    <div className="text-red-700 text-xs md:text-lg w-full text-center">Note: You will recieve Mail at the time of your Website downtime!</div>
                     <div className="mt-10 w-full flex justify-center items-center gap-2">
                         <div className="md:flex items-center justify-center gap-2 w-full">
                             <div className="flex items-center justify-center text-center">
