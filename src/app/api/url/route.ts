@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
 
     const job = setInterval(
         () => checkWebsite({ url, email: user.email, userId }), 
-        20 * 1000
+        5 * 60 * 1000
     );
     activeJobs.set(url, job);
 
