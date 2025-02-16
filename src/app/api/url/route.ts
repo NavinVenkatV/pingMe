@@ -19,35 +19,65 @@ interface WebsiteMonitor {
     userId: number;
 }
 
-
-function sendMail({ url, email }: { url: string; email: string }) {
+function sendMail({ url, email, error = "unknown reason" }: { url: string; email: string; error?: string }) {
     transport.sendMail({
         from: process.env.EMAIL_USER,
         to: email,
         subject: "pingME: Your website is currently down",
-        text: `Your website ${url} is currently down due to an unknown reason.`,
+        text: `Your website ${url} is currently down. Reason: ${error}`,
     });
 }
 
 const checkWebsite = async ({ url, email, userId }: WebsiteMonitor) => {
+    console.log(`Checking website ${url} at ${new Date().toISOString()}`);
     try {
-        const res = await axios.get(url);
+        const res = await axios.get(url, {
+            timeout: 5000,
+            validateStatus: function (status) {
+                return status < 400;
+            },
+        });
 
         await prisma.website.updateMany({
             where: { url, userId },
-            data: { lastStatus: res.status, lastCheckedAt: new Date().toISOString() },
+            data: { 
+                lastStatus: res.status, 
+                lastCheckedAt: new Date().toISOString() 
+            },
         });
 
         console.log(`${url} is UP with status ${res.status}`);
-    } catch (e) {
+    } catch (e: any) {
+        let errorStatus = 500;
+        let errorMessage = "Unknown error";
+
+        if (e.code === 'EAI_AGAIN') {
+            errorStatus = 503;
+            errorMessage = "DNS lookup failed - domain may be invalid or DNS servers are not responding";
+        } else if (e.code === 'ECONNREFUSED') {
+            errorStatus = 503;
+            errorMessage = "Connection refused by the server";
+        } else if (e.response) {
+            errorStatus = e.response.status;
+            errorMessage = `HTTP error: ${e.response.status}`;
+        } else if (e.code === 'ECONNABORTED') {
+            errorStatus = 504;
+            errorMessage = "Request timed out";
+        }
+
         await prisma.website.updateMany({
             where: { url, userId },
-            data: { lastStatus: 500, lastCheckedAt: new Date().toISOString() },
+            data: { 
+                lastStatus: errorStatus,
+                lastCheckedAt: new Date().toISOString() 
+            },
         });
 
-        console.log(`${url} is DOWN! Sending alert to ${email}`, e);
+        console.log(`${url} is DOWN! Sending alert to ${email}. Error: ${errorMessage}`);
 
-        if (email) sendMail({ url, email });
+        if (email) {
+            sendMail({ url, email, error: errorMessage });
+        }
     }
 };
 
@@ -65,6 +95,12 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ msg: "User not exists!" }, { status: 404 });
     }
 
+    // Clear existing monitoring
+    if (activeJobs.has(url)) {
+        clearInterval(activeJobs.get(url));
+        activeJobs.delete(url);
+    }
+
     let website = await prisma.website.findFirst({
         where: { url, userId },
     });
@@ -80,32 +116,45 @@ export async function POST(req: NextRequest) {
         });
     }
 
-    const job = setInterval(() => checkWebsite({ url, email: user.email, userId }), 5 * 60 * 1000);
+    // Immediate first check
+    await checkWebsite({ url, email: user.email, userId });
+
+    const job = setInterval(
+        () => checkWebsite({ url, email: user.email, userId }), 
+        20 * 1000
+    );
     activeJobs.set(url, job);
 
-    return NextResponse.json({ msg: `Monitoring started for ${url}` });
+    return NextResponse.json({ 
+        msg: `Monitoring started for ${url}`,
+        activeMonitoring: Array.from(activeJobs.keys())
+    });
 }
-
 
 export async function DELETE(req: NextRequest) {
     const { url, userId } = await req.json();
 
-        try{
-            await prisma.website.delete({
-                where : {
-                    url,
-                    userId
-                }
-            })
+    try {
+        await prisma.website.delete({
+            where: {
+                url,
+                userId
+            }
+        });
+        
+        if (activeJobs.has(url)) {
             clearInterval(activeJobs.get(url));
             activeJobs.delete(url);
-            return NextResponse.json({ msg: "pingMe stopped monitoring your website!" });
-        }catch(e){
-            console.log(e)
-            return NextResponse.json({ msg: "Website is not found in active monitoring!" });
         }
-    
-
+        
+        return NextResponse.json({ 
+            msg: "pingMe stopped monitoring your website!",
+            activeMonitoring: Array.from(activeJobs.keys())
+        });
+    } catch(e) {
+        console.log(e);
+        return NextResponse.json({ msg: "Website is not found in active monitoring!" });
+    }
 }
 
 export async function GET(req: NextRequest) {
@@ -113,24 +162,45 @@ export async function GET(req: NextRequest) {
     const url = searchParams.get('paramUrl');
     
     if (!url) {
-        return NextResponse.json({ msg: "Url is missing!" }, { status: 400 });
+        return NextResponse.json({ 
+            activeMonitoring: Array.from(activeJobs.keys()),
+            totalActive: activeJobs.size
+        });
     }
 
     try {
         const status = await prisma.website.findFirst({
             where: { url }
         });
-        if(!status){
-            return NextResponse.json({msg : "Website not found!"})
+        
+        const isActivelyMonitored = activeJobs.has(url);
+
+        if (!status) {
+            return NextResponse.json({
+                msg: "Website not found!",
+                isMonitored: isActivelyMonitored
+            });
         }
 
-        if (status?.lastStatus !== 200) {
-            return NextResponse.json({ msg: "Your Website is down!" });
-        } else {
-            return NextResponse.json({ msg: "Your Website is working fine!" });
-        }
+        return NextResponse.json({
+            msg: status.lastStatus < 400 ? "Your Website is working fine!" : "Your Website is down!",
+            lastStatus: status.lastStatus,
+            lastCheckedAt: status.lastCheckedAt,
+            isMonitored: isActivelyMonitored
+        });
     } catch (e) {
-        console.log("Something went wrong!",e)
+        console.error("Something went wrong!", e);
         return NextResponse.json({ msg: "Something went wrong!" }, { status: 500 });
     }
 }
+
+// Cleanup handlers
+process.on('SIGTERM', () => {
+    activeJobs.forEach((job) => clearInterval(job));
+    activeJobs.clear();
+});
+
+process.on('SIGINT', () => {
+    activeJobs.forEach((job) => clearInterval(job));
+    activeJobs.clear();
+});
