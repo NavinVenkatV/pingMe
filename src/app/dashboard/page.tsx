@@ -161,7 +161,7 @@ export default function Dashboard() {
                     <div className="mt-3 text-center te">Successfully Added your Website to pingMe</div>
                     <button onClick={() => {
                         setGifloading(false)
-                    }} className="w-full rounded-xl px-3 py-2 bg-blue-500 text-black mt-4 hover:bg-blue-700 transition-all duration-300">Close</button>
+                    }} className="w-full rounded-xl px-3 py-2 bg-[rgb(118,48,128)] hover:bg-[rgb(74,18,75)] text-white mt-4 transition-all duration-300">Close</button>
                 </div>
             </motion.div>}
             <Header setIsSideOpen={setIsSideOpen} />
@@ -202,7 +202,7 @@ export default function Dashboard() {
                          className="mt-5 px-auto lg:w-[900px] w-auto">
                             {urls.map(({ url: itemUrl, status }) => (
                                 <div key={Random()} className="bg-[rgba(17,17,29,0.8)] text-white p-3 mt-2 rounded-xl md:flex justify-between">
-                                    <div className="flex flex-col text-sm md:text-xl items-center justify-center text-blue-500 font-bold">{itemUrl}</div>
+                                    <div className="flex flex-col text-sm md:text-xl items-center justify-center text-pink-500 font-bold">{itemUrl}</div>
                                     <div className="md:flex gap-5">
                                         <div className="flex md:flex-col text-center pl-3 items-center justify-center">Current Status: {status}</div>
                                         <div className="flex justify-center items-center">

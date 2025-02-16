@@ -40,7 +40,7 @@ export default function Hero() {
                         </button>
                     </div>
                 </div>
-                <div className="mt-7 text-sm text-black">Start monitoring for free or <span><Link href="/" className="underline text-white">book a demo</Link></span></div>
+                <div className="mt-7 text-sm text-pink-500 md:text-black">Start monitoring for free or <span><Link href="/" className="underline text-white">book a demo</Link></span></div>
             </div>
         </div>
     )
