@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <div className={`relative min-h-screen overflow-hidden ${font.className}`}>
       <Header setIsSideOpen={setIsSideOpen} />   
-      <Image src="/mainImage/pingMeF.jpg" alt="Hero_section_image" className="absolute z-0" width={2000} height={2000} />   
+      <Image src="/mainImage/aura.jpg" alt="Hero_section_image" className="absolute z-0 " width={2000} height={5000} />   
       {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />} 
       <Hero />
       <RevealBento />

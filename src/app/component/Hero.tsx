@@ -22,7 +22,7 @@ export default function Hero() {
                     initial={{  y: 50 }}
                     animate={{ y: 0 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                     className="text-gray-500 mt-3 md:mt-7 text-sm md:text-xl w-[300px] md:w-[500px]"> PingMe is a tool that helps you monitor your website and get notified when it goes down. </motion.div>
+                     className="text-white mt-3 md:mt-7 text-sm md:text-xl w-[300px] md:w-[500px]"> PingMe is a tool that helps you monitor your website and get notified when it goes down. </motion.div>
                 </div>
                 <div className="flex mt-8 px-5 w-full justify-center">
                     <div className=" mt-3 gap-3 px-3 w-[200px] md:w-[250px] lg:w-[300px]">
@@ -40,7 +40,7 @@ export default function Hero() {
                         </button>
                     </div>
                 </div>
-                <div className="mt-7 text-sm text-gray-500">Start monitoring for free or <span><Link href="/" className="underline text-gray-400">book a demo</Link></span></div>
+                <div className="mt-7 text-sm text-black">Start monitoring for free or <span><Link href="/" className="underline text-white">book a demo</Link></span></div>
             </div>
         </div>
     )

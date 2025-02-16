@@ -65,9 +65,9 @@ const Block = ({ className, ...rest }: BlockProps) => {
 
 const HeaderBlock = () => (
   <Block className="col-span-12 row-span-2 md:col-span-6">
-    <h1 className="mb-12 text-xl md:text-2xl lg:text-3xl font-medium leading-tight">
+    <h1 className="mb-12 text-xl md:text-2xl text-pink-500 lg:text-3xl font-medium leading-tight">
       pingMe.{" "}
-      <span className="text-gray-500">
+      <span className="text-white">
       Ship higher-quality software faster.
       </span>
     </h1>

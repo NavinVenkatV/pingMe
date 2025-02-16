@@ -189,7 +189,7 @@ export default function Dashboard() {
                                 />
                             </div>
                             <div className="flex items-center justify-center mt-3 md:mt-0">
-                                <button onClick={handleSubmit} className="px-3 py-2 bg-blue-500 text-white flex flex-col justify-center rounded-2xl hover:bg-blue-700 transition-all duration-300 ">{loading ? <Spinner /> : "Add Url"}</button>
+                                <button onClick={handleSubmit} className="px-3 py-2 text-white flex flex-col justify-center rounded-2xl bg-[rgb(118,48,128)] hover:bg-[rgb(74,18,75)] transition-all duration-300 ">{loading ? <Spinner /> : "Add Url"}</button>
                             </div>
                         </div>
                     </div>
