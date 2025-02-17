@@ -22,10 +22,11 @@ interface WebsiteMonitor {
 
 function sendMail({ url, email, error = "unknown reason" }: { url: string; email: string; error?: string }) {
     transport.sendMail({
-        from: process.env.EMAIL_USER,
+        from: process.env.EMAIL_USER as "pingME@gmail.com",
         to: email,
         subject: "pingME: Your website is currently down",
-        text: `Your website ${url} is currently down. Reason: ${error}`,
+        text: `Your Website ${url} is currently down. To stop recieving alerts, please delete the website from your dashboard
+            here https://pingmeyourwebsite.vercel.app/dashboard or debug the issue. <br/>`,
     });
 }
 
@@ -76,7 +77,8 @@ const checkWebsite = async ({ url, email, userId }: WebsiteMonitor) => {
             },
         });
 
-        console.log(`${url} is DOWN! Sending alert to ${email}. Error: ${errorMessage}`);
+        console.log(`${url} is DOWN! Sending alert to ${email}, To stop recieving alerts, please delete the website from your dashboard
+            here https://pingmeyourwebsite.vercel.app/. Error: ${errorMessage}`);
 
         if (email) {
             sendMail({ url, email, error: errorMessage });
