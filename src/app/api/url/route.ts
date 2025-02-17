@@ -24,10 +24,27 @@ function sendMail({ url, email, error = "unknown reason" }: { url: string; email
     transport.sendMail({
         from: process.env.EMAIL_USER as "pingME@gmail.com",
         to: email,
-        subject: "pingME: Your website is currently down",
-        text: `Your Website ${url} is currently down. To stop recieving alerts, please delete the website from your dashboard
-            here https://pingmeyourwebsite.vercel.app/dashboard or debug the issue. <br/>
-            Error: ${error}`,
+        subject: "PingME Alert: Website Downtime Detected",
+        text: `Dear User,
+
+We detected that your monitored website (${url}) is currently experiencing downtime.
+
+Error Details:
+${error}
+
+To resolve this:
+1. Check your website's infrastructure and connectivity
+2. Verify your server status and configurations
+3. Contact your hosting provider if needed
+
+To stop receiving these alerts, you can:
+- Visit your dashboard at: https://pingmeyourwebsite.vercel.app/dashboard
+- Remove this website from your monitoring list
+
+If you need assistance, please don't hesitate to contact our support team.
+
+Best regards,
+PingME Monitoring Team`,
     });
 }
 
