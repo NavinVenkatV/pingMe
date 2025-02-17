@@ -168,7 +168,7 @@ export default function Dashboard() {
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
             <div className="w-screen min-h-screen flex justify-center p-5">
                 <div className="flex flex-col items-center justify-center w-full max-w-[700px] px-5 rounded-lg">
-                    <video width={500} height={500} src="/gif/leo.mp4" autoPlay muted loop className="rounded-xl" />
+                    <Image width={500} height={500} src="/gif/leo.gif" alt="Hero fig" className="rounded-xl" />
                     <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -176,7 +176,7 @@ export default function Dashboard() {
                      className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center text-slate-400 mt-5">
                         pingMe - Your Website Monitoring Solution
                     </motion.div>
-                    <div className="text-pink-500 text-xs md:text-lg w-full text-center">Note: You will recieve Mail at the time of your Website downtime!</div>
+                    <div className="text-red-700 text-xs md:text-lg w-full text-center">Note: You will recieve Mail at the time of your Website downtime!</div>
                     <div className="mt-10 w-full flex justify-center items-center gap-2">
                         <div className="md:flex items-center justify-center gap-2 w-full">
                             <div className="flex items-center justify-center text-center">
