@@ -22,7 +22,7 @@ interface WebsiteMonitor {
 
 function sendMail({ url, email, error = "unknown reason" }: { url: string; email: string; error?: string }) {
     transport.sendMail({
-        from: process.env.EMAIL_USER as "pingME@gmail.com",
+        from: process.env.EMAIL_USER,
         to: email,
         subject: "PingME Alert: Website Downtime Detected",
         text: `Dear User,
