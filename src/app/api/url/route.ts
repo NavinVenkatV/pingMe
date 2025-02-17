@@ -26,7 +26,8 @@ function sendMail({ url, email, error = "unknown reason" }: { url: string; email
         to: email,
         subject: "pingME: Your website is currently down",
         text: `Your Website ${url} is currently down. To stop recieving alerts, please delete the website from your dashboard
-            here https://pingmeyourwebsite.vercel.app/dashboard or debug the issue. <br/>`,
+            here https://pingmeyourwebsite.vercel.app/dashboard or debug the issue. <br/>
+            Error: ${error}`,
     });
 }
 
