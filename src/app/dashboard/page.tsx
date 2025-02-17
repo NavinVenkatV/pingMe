@@ -168,7 +168,7 @@ export default function Dashboard() {
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
             <div className="w-screen min-h-screen flex justify-center p-5">
                 <div className="flex flex-col items-center justify-center w-full max-w-[700px] px-5 rounded-lg">
-                    <Image width={500} height={500} src="/gif/leo.gif" alt="Hero fig" className="rounded-xl" />
+                    <video width={500} height={500} src="/gif/leo.mp4" autoPlay muted loop className="rounded-xl" />
                     <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
