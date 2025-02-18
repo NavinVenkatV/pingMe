@@ -37,7 +37,7 @@ export default function Dashboard() {
         if (status !== "loading" && status === "unauthenticated") {
             router.push("/");
         }
-    }, [session?.user.id]);
+    }, []);
     
     useEffect(() => {
         async function fetchUrls() {
@@ -148,7 +148,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div className={`overflow-hidden pb-3 text-white ${font.className} relative z-0`}>
+        <div className={`overflow-hidden pb-3 text-white ${font.className} `}>
             {gifloading &&
              <motion.div
              initial={{ opacity: 0, z: 50 }}
@@ -164,9 +164,11 @@ export default function Dashboard() {
                     }} className="w-full rounded-xl px-3 py-2 bg-[rgb(118,48,128)] hover:bg-[rgb(74,18,75)] text-white mt-4 transition-all duration-300">Close</button>
                 </div>
             </motion.div>}
+            {/* <video src="/mainImage/4.mp4" autoPlay loop  muted className="absolute z-0 w-full h-full object-cover"></video> */}
+            <Image src='/mainImage/1.png' alt="Hero fig" className="absolute z-0 w-full h-full   object-cover" width={1600} height={1200}/>
             <Header setIsSideOpen={setIsSideOpen} />
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
-            <div className="w-screen min-h-screen flex justify-center p-5">
+            <div className="w-screen min-h-screen relative z-10 flex justify-center p-5">
                 <div className="flex flex-col items-center justify-center w-full max-w-[700px] px-5 rounded-lg">
                     <Image width={500} height={500} src="/gif/leo.gif" alt="Hero fig" className="rounded-xl" />
                     <motion.div
@@ -176,7 +178,7 @@ export default function Dashboard() {
                      className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center text-slate-400 mt-5">
                         pingMe - Your Website Monitoring Solution
                     </motion.div>
-                    <div className="text-red-700 text-xs md:text-lg w-full text-center">Note: You will recieve Mail at the time of your Website downtime!</div>
+                    <div className="text-white text-xs md:text-lg w-full text-center">Note: You will recieve Mail at the time of your Website downtime!</div>
                     <div className="mt-10 w-full flex justify-center items-center gap-2">
                         <div className="md:flex items-center justify-center gap-2 w-full">
                             <div className="flex items-center justify-center text-center">

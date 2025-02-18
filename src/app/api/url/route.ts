@@ -118,7 +118,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ msg: "User not exists!" }, { status: 404 });
     }
 
-    // Clear existing monitoring
     if (activeJobs.has(url)) {
         clearInterval(activeJobs.get(url));
         activeJobs.delete(url);
@@ -139,7 +138,6 @@ export async function POST(req: NextRequest) {
         });
     }
 
-    // Immediate first check
     await checkWebsite({ url, email: user.email, userId });
 
     const job = setInterval(
