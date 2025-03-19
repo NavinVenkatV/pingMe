@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Hero from "./component/Hero";
 import RevealBento from "./component/Marquee";
+
 import Slide from "./component/Slide";
 import Lenis from "lenis";
 import Header from "./component/Header";
@@ -9,7 +10,6 @@ import { Raleway } from "next/font/google";
 import { Middle, Middle2 } from "./component/Middle";
 import { Footer } from "./component/Footer";
 import { Side } from "./component/ui/Side";
-import Image from "next/image";
 import Testimonials from "./component/ui/testimonials";
 
 const font = Raleway({
