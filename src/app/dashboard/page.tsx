@@ -23,7 +23,6 @@ export default function Dashboard() {
     const [url, setUrl] = useState("");
     const { data: session, status } = useSession();
     const [ error, setError ] = useState(false)
-    const [ checkUrl, setCheckUrl ] = useState(false)
     const router = useRouter();
     const intervals = useRef<Record<string, NodeJS.Timeout | number>>({});
     const [urls, setUrls] = useState<{ url: string; status: string }[]>([]);
@@ -234,6 +233,7 @@ export default function Dashboard() {
             <div className="mt-10">
                 <Slide />
             </div>
+            
             <div className="flex flex-wrap justify-center gap-10 px-3 py-10">
         <Testimonials title="What Our Users Say" description="Discover how PingMe has helped businesses maintain uptime and reliability." />
         <Testimonials title="Customer Reviews" description="Real feedback from our satisfied users who trust PingMe for website monitoring." />

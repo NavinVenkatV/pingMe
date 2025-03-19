@@ -81,7 +81,7 @@ const handler = NextAuth({
             }
             return true;
         },
-        async redirect({url, baseUrl}){
+        async redirect(){
             return "/dashboard"
         }
     }
