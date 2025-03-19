@@ -13,6 +13,7 @@ import Slide from "../component/Slide";
 import { Side } from "../component/ui/Side";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Testimonials from "../component/ui/testimonials";
 
 
 
@@ -21,6 +22,8 @@ const font = Raleway({ subsets: ["latin"] });
 export default function Dashboard() {
     const [url, setUrl] = useState("");
     const { data: session, status } = useSession();
+    const [ error, setError ] = useState(false)
+    const [ checkUrl, setCheckUrl ] = useState(false)
     const router = useRouter();
     const intervals = useRef<Record<string, NodeJS.Timeout | number>>({});
     const [urls, setUrls] = useState<{ url: string; status: string }[]>([]);
@@ -37,7 +40,7 @@ export default function Dashboard() {
         if (status !== "loading" && status === "unauthenticated") {
             router.push("/");
         }
-    }, []);
+    }, [status]);
     
     useEffect(() => {
         async function fetchUrls() {
@@ -91,6 +94,10 @@ export default function Dashboard() {
 
     const handleSubmit = async () => {
         if (!url) return alert("Please enter a URL");
+        if(!url.startsWith("https://") || !url.endsWith("/")) {
+            setError(true);
+            return;
+        }
 
         try {
             if (urls.some((u) => u.url === url)) {
@@ -165,7 +172,7 @@ export default function Dashboard() {
                 </div>
             </motion.div>}
             {/* <video src="/mainImage/4.mp4" autoPlay loop  muted className="absolute z-0 w-full h-full object-cover"></video> */}
-            <Image src='/mainImage/1.png' alt="Hero fig" className="absolute z-0 w-full h-full   object-cover" width={1600} height={1200}/>
+            <Image src='/mainImage/1.png' alt="Hero fig" className="absolute z-0 w-full max-h-[1500px]  object-cover" width={1600} height={1200}/>
             <Header setIsSideOpen={setIsSideOpen} />
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
             <div className="w-screen min-h-screen relative z-10 flex justify-center p-5">
@@ -195,6 +202,8 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
+                    {error && <div className="mt-2 text-sm text-slate-400">Please Enter a Valid Url (eg: https://navinvenkat.xyz/)</div>}
+
 
                     {urls.length > 0 && (
                         <motion.div
@@ -222,7 +231,17 @@ export default function Dashboard() {
                     )}
                 </div>
             </div>
-            <Slide />
+            <div className="mt-10">
+                <Slide />
+            </div>
+            <div className="flex flex-wrap justify-center gap-10 px-3 py-10">
+        <Testimonials title="What Our Users Say" description="Discover how PingMe has helped businesses maintain uptime and reliability." />
+        <Testimonials title="Customer Reviews" description="Real feedback from our satisfied users who trust PingMe for website monitoring." />
+        <Testimonials title="Trusted by Businesses" description="From startups to enterprises, PingMe ensures uninterrupted service and performance." />
+        <Testimonials title="Why People Love PingMe" description="See why users rely on PingMe for instant alerts and detailed analytics." />
+        <Testimonials title="Real Feedback from Users" description="Honest reviews from people who trust PingMe to keep their websites running smoothly." />
+
+      </div>
             <Footer />
         </div>
     );

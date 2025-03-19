@@ -20,7 +20,7 @@ export const Footer = () => {
                 </div>
                 <div className="flex gap-3 items-center justify-center">
                     <div className="hidden md:block">
-                    <div className="flex flex-col w-full h-full items-center justify-center">(+91) 636930-1474</div>
+                    {/* <div className="flex flex-col w-full h-full items-center justify-center"></div> */}
                     </div>
                     <div className="hidden md:block">
                     <div className="w-full h-full flex flex-col items-center justify-center">pingMeBuisness@gmail.com</div>

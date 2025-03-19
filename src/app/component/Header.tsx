@@ -37,7 +37,7 @@ export default function Header({ setIsSideOpen }: typess) {
           </div>
           <div className="hidden md:block">
             <Button name="Home" onSignIn={() => {
-              router.push('/')
+              router.push('/dashboard')
             }} />
           </div>
           <div className="hidden md:block">

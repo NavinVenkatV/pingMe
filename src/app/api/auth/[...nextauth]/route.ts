@@ -80,6 +80,9 @@ const handler = NextAuth({
                 user.id = existingUser.id.toString();
             }
             return true;
+        },
+        async redirect({url, baseUrl}){
+            return "/dashboard"
         }
     }
 } as NextAuthOptions);

@@ -14,14 +14,14 @@ export default function Hero() {
                 <div className="flex flex-col justify-center text-center items-center">
                     <Image src="/l2.png" alt="title" className="mb-3 md:mb-12" width={150} height={150} />
                     <motion.div
-                    initial={{ y: -50 }}
-                    animate={{  y: 0 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    initial={{ z: 20, opacity:0 }}
+                    whileInView={{ z: 0, opacity:1 }}
+                    transition={{duration: 1, ease: "easeInOut" }}
                      className="lg:text-7xl text-3xl md:text-5xl font-bold">Never Miss a Downtime Again!!!</motion.div>
                     <motion.div
-                    initial={{  y: 50 }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                     initial={{ z: 50, opacity:0 }}
+                     whileInView={{ z: 0, opacity:1 }}
+                     transition={{duration: 1.5, ease: "easeInOut" }}
                      className="text-white mt-3 md:mt-7 text-sm md:text-xl w-[300px] md:w-[500px]"> PingMe is a tool that helps you monitor your website and get notified when it goes down. </motion.div>
                 </div>
                 <div className="flex mt-8 px-5 w-full justify-center">
