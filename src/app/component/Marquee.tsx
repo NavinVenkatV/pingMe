@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function RevealBento(){
     return (
-    <div className="min-h-screen px-4 py-12 mt-10 md:mt-16 lg:mt-24 text-zinc-50 relative">
+    <div className="min-h-screen bg-black px-4 py-12 mt-32 md:mt-16 lg:mt-24 text-zinc-50 relative">
       <motion.div
         initial="initial"
         animate="animate"
@@ -115,7 +115,7 @@ const SocialsBlock = () => (
         rotate: "-2.5deg",
         scale: 1.1,
       }}
-      className="col-span-6 bg-zinc-50 md:col-span-3"
+      className="col-span-6  md:col-span-3"
     >
       <Link
         href="#"
@@ -142,10 +142,10 @@ const SocialsBlock = () => (
 );
 
 const AboutBlock = () => (
-  <Block className="col-span-12 text-xl md:text-2xl lg:text-3xl leading-snug">
-    <p>
+  <Block className="col-span-12 text-whtie text-xl md:text-2xl lg:text-3xl leading-snug">
+    <p className="text-blue-500">
       What pingMe provides?{" "}
-      <span className="text-gray-500">
+      <span className="text-white">
       By storing ping results over time, the project provides historical insights into website performance. Users can analyze trends, pinpoint recurring issues, and make informed decisions to optimize site reliability.
       </span>
     </p>
@@ -154,14 +154,14 @@ const AboutBlock = () => (
 
 const LocationBlock = () => (
   <Block className="col-span-12 flex flex-col items-center gap-4 md:col-span-3">
-    <FiMapPin className="text-3xl" />
+    <FiMapPin className="text-3xl text-transparent bg-cli" />
     <p className="text-center text-lg text-zinc-400">CA</p>
   </Block>
 );
 
 const EmailListBlock = () => (
   <Block className="col-span-12 md:col-span-9">
-    <p className="mb-3 text-lg">Join my mailing list</p>
+    <p className="mb-3 text-lg text-white">Join my mailing list</p>
     <form
       onSubmit={(e) => e.preventDefault()}
       className="flex items-center gap-2"
@@ -173,7 +173,7 @@ const EmailListBlock = () => (
       />
       <button
         type="submit"
-        className="flex items-center gap-2 whitespace-nowrap rounded bg-zinc-50 px-3 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-300"
+        className="flex items-center gap-2 whitespace-nowrap rounded px-3 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-300"
       >
         <FiMail /> Join the list
       </button>
