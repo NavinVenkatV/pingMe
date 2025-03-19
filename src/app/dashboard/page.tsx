@@ -96,7 +96,7 @@ export default function Dashboard() {
         if(!url.startsWith("https://") || !url.endsWith("/")) {
             setError(true);
             return;
-        }
+        }else setError(false)
 
         try {
             if (urls.some((u) => u.url === url)) {
@@ -154,7 +154,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div className={`overflow-hidden pb-3 text-white ${font.className} `}>
+        <div className={`overflow-hidden pb-3 bg-black text-white ${font.className} `}>
             {gifloading &&
              <motion.div
              initial={{ opacity: 0, z: 50 }}
@@ -172,7 +172,7 @@ export default function Dashboard() {
             </motion.div>}
             {/* <video src="/mainImage/4.mp4" autoPlay loop  muted className="absolute z-0 w-full h-full object-cover"></video> */}
             {/* <Image src='/mainImage/1.png' alt="Hero fig" className="absolute z-0 w-full max-h-[1500px]  object-cover" width={1600} height={1200}/> */}
-            <video src="/video/bgvid.mp4" autoPlay loop muted  className="absolute z-0 h-[150vh] lg:h-auto"></video>
+            <video src="/video/bgvid.mp4" autoPlay loop muted  className="absolute z-0 h-[166vh] lg:h-auto"></video>
 
             <Header setIsSideOpen={setIsSideOpen} />
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
@@ -203,7 +203,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    {error && <div className="mt-2 text-center text-sm text-slate-400">Please Enter a Valid Url (eg: https://navinvenkat.xyz/)</div>}
+                    {error && <div className="mt-2 text-center text-sm text-red-500">Please Enter a Valid Url (eg: https://navinvenkat.xyz/)</div>}
 
 
                     {urls.length > 0 && (
@@ -213,7 +213,7 @@ export default function Dashboard() {
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                          className="mt-5 px-auto lg:w-[900px] w-auto">
                             {urls.map(({ url: itemUrl, status }) => (
-                                <div key={Random()} className="bg-[rgba(17,17,29,0.8)] text-white p-3 mt-2 rounded-xl md:flex justify-between">
+                                <div key={Random()} className="bg-black text-white p-3 mt-2 rounded-xl md:flex justify-between">
                                     <div className="flex flex-col text-sm md:text-xl items-center justify-center text-pink-500 font-bold">{itemUrl}</div>
                                     <div className="md:flex gap-5">
                                         <div className="flex md:flex-col text-center pl-3 items-center justify-center">Current Status: {status}</div>

@@ -29,7 +29,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={`relative min-h-screen overflow-hidden ${font.className}`}>
+    <div className={`relative min-h-screen bg-black overflow-hidden ${font.className}`}>
       <Header setIsSideOpen={setIsSideOpen} />
       {/* <Image src="/mainImage/aura.jpg" alt="Hero_section_image" className="absolute z-0 " width={2000} height={5000} /> */}
       <video src="/video/bgvid.mp4" autoPlay loop muted  className="absolute z-0 h-[95vh] lg:h-auto"></video>

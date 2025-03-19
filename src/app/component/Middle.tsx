@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const Middle = () => {
     return (
-        <div className="text-white p-6 md:p-10">
+        <div className="text-white bg-black p-6 md:p-10">
             <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
