@@ -17,7 +17,7 @@ export default function Hero() {
                     initial={{ z: 20, opacity:0 }}
                     whileInView={{ z: 0, opacity:1 }}
                     transition={{duration: 1, ease: "easeInOut" }}
-                     className="lg:text-7xl text-3xl md:text-5xl font-bold">Never Miss a Downtime Again!!!</motion.div>
+                     className="lg:text-7xl text-3xl md:text-5xl font-bold">Never Miss a <span className="text-blue-500">Downtime Again!!!</span></motion.div>
                     <motion.div
                      initial={{ z: 50, opacity:0 }}
                      whileInView={{ z: 0, opacity:1 }}
@@ -40,7 +40,7 @@ export default function Hero() {
                         </button>
                     </div>
                 </div>
-                <div className="mt-7 text-sm text-pink-500 md:text-black">Start monitoring for free or <span><Link href="/" className="underline text-white">book a demo</Link></span></div>
+                <div className="mt-7 text-sm text-white">Start monitoring for free or <span><Link href="/" className="underline text-blue-500">book a demo</Link></span></div>
             </div>
         </div>
     )

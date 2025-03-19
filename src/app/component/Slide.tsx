@@ -42,7 +42,7 @@ function Slider({ left, progress, direction } : { left : string, progress : Moti
 
 function Phrase() {
     return (
-        <div className="flex items-center px-2 md:px-5 lg:px-10  text-slate-400">
+        <div className="flex items-center px-2 md:px-5 lg:px-10  text-white">
             <div className="text-[5vw]">Never Miss a Downtime Again!!!</div>
             {/* <span className="relative h-[5vw] aspect-[4/2] rounded-full overflow-hidden">
                 <Image style={{ objectFit: "cover" }} src={src} alt="image" fill />

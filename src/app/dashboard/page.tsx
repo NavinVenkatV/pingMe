@@ -171,7 +171,9 @@ export default function Dashboard() {
                 </div>
             </motion.div>}
             {/* <video src="/mainImage/4.mp4" autoPlay loop  muted className="absolute z-0 w-full h-full object-cover"></video> */}
-            <Image src='/mainImage/1.png' alt="Hero fig" className="absolute z-0 w-full max-h-[1500px]  object-cover" width={1600} height={1200}/>
+            {/* <Image src='/mainImage/1.png' alt="Hero fig" className="absolute z-0 w-full max-h-[1500px]  object-cover" width={1600} height={1200}/> */}
+            <video src="/video/bgvid.mp4" autoPlay loop muted  className="absolute z-0 h-[150vh] lg:h-auto"></video>
+
             <Header setIsSideOpen={setIsSideOpen} />
             {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
             <div className="w-screen min-h-screen relative z-10 flex justify-center p-5">
@@ -197,11 +199,11 @@ export default function Dashboard() {
                                 />
                             </div>
                             <div className="flex items-center justify-center mt-3 md:mt-0">
-                                <button onClick={handleSubmit} className="px-3 py-2 text-white flex flex-col justify-center rounded-2xl bg-[rgb(118,48,128)] hover:bg-[rgb(74,18,75)] transition-all duration-300 ">{loading ? <Spinner /> : "Add Url"}</button>
+                                <button onClick={handleSubmit} className="px-3 py-2 text-white flex flex-col justify-center rounded-2xl bg-blue-500 hover:bg-blue-900 hover:scale-110 transition-all duration-300 ">{loading ? <Spinner /> : "Add Url"}</button>
                             </div>
                         </div>
                     </div>
-                    {error && <div className="mt-2 text-sm text-slate-400">Please Enter a Valid Url (eg: https://navinvenkat.xyz/)</div>}
+                    {error && <div className="mt-2 text-center text-sm text-slate-400">Please Enter a Valid Url (eg: https://navinvenkat.xyz/)</div>}
 
 
                     {urls.length > 0 && (
@@ -230,11 +232,11 @@ export default function Dashboard() {
                     )}
                 </div>
             </div>
-            <div className="mt-10">
+            <div className="mt-20">
                 <Slide />
             </div>
             
-            <div className="flex flex-wrap justify-center gap-10 px-3 py-10">
+            <div className="flex flex-wrap justify-center lg:gap-10 px-3 py-10">
         <Testimonials title="What Our Users Say" description="Discover how PingMe has helped businesses maintain uptime and reliability." />
         <Testimonials title="Customer Reviews" description="Real feedback from our satisfied users who trust PingMe for website monitoring." />
         <Testimonials title="Trusted by Businesses" description="From startups to enterprises, PingMe ensures uninterrupted service and performance." />
