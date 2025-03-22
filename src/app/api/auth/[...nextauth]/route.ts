@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
 import {prisma} from "@/lib/prisma"
+import { pages } from "next/dist/build/templates/app-page";
 
 
 
@@ -52,6 +53,9 @@ const handler = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
         })
     ],
+    pages : {
+        signIn : "/login"
+    },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async session({ session, token }: { session: Session; token: JWT }) {
