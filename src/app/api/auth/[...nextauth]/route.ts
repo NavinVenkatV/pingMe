@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
 import {prisma} from "@/lib/prisma"
-import { pages } from "next/dist/build/templates/app-page";
+// import { pages } from "next/dist/build/templates/app-page";
 
 
 
