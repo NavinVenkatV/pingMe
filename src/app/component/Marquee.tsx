@@ -19,6 +19,7 @@ export default function RevealBento(){
         }}
         className="mx-auto grid max-w-4xl grid-flow-dense grid-cols-12 gap-4"
       >
+        
         <HeaderBlock />
         <SocialsBlock />
         <AboutBlock />

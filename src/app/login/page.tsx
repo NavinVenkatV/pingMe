@@ -17,10 +17,12 @@ function Page() {
   return (
     <div className="text-white flex justify-center items-center w-screen m-0 p-0 h-screen overflow-hidden">
       <div className="bg-black py-10 px-10 md:px-16 mx-auto mb-20 overflow-hidden rounded-2xl border border-blue-500 shadow-lg shadow-blue-500  max-w-md">
-        <div className="text-center flex justify-center">
-          <Link href="/">
+        <div className="text-center flex flex-col w-full  justify-center">
+          <Link href="/"
+          className="text-center flex justify-center">
             <Image src="/l2.png" alt="logo" width={130} height={100} />
           </Link>
+          <div className="text-center  mt-4 text-2xl md:text-4xl text-blue-700 flex justify-center">Welcome back!</div>
         </div>
         <form onSubmit={handleSubmit} className="mt-10  mb-10 h-full w-[200px] md:w-[300px]">
           <div
