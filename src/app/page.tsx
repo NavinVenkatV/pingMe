@@ -29,25 +29,27 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={`relative min-h-screen bg-black overflow-hidden ${font.className}`}>
+    <div className={`relative w-full h-full bg-black overflow-hidden ${font.className}`}>
+      <img src="/grai.png" alt="" className="fixed top-0 left-0 w-screen h-screen object-cover" />
+      <div className="relative z-10">
+      <div className="px-10 mt-5">
       <Header setIsSideOpen={setIsSideOpen} />
-      {/* <Image src="/mainImage/aura.jpg" alt="Hero_section_image" className="absolute z-0 " width={2000} height={5000} /> */}
-      <video src="/video/bgvid.mp4" autoPlay loop muted  className="absolute z-0 h-[95vh] lg:h-auto"></video>
-      {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
-      <Hero />
-      <RevealBento />
-      <Middle />
-      <Slide />
-      <Middle2 />
-      <div className="flex flex-wrap justify-center gap-10 px-3 py-10">
-        <Testimonials title="What Our Users Say" description="Discover how PingMe has helped businesses maintain uptime and reliability." />
-        <Testimonials title="Customer Reviews" description="Real feedback from our satisfied users who trust PingMe for website monitoring." />
-        <Testimonials title="Trusted by Businesses" description="From startups to enterprises, PingMe ensures uninterrupted service and performance." />
-        <Testimonials title="Why People Love PingMe" description="See why users rely on PingMe for instant alerts and detailed analytics." />
-        <Testimonials title="Real Feedback from Users" description="Honest reviews from people who trust PingMe to keep their websites running smoothly." />
-
       </div>
-      <Footer />
+        {isSideOpen && <Side setIsSideOpen={setIsSideOpen} />}
+        <Hero />
+        <RevealBento />
+        <Middle />
+        <Slide />
+        <Middle2 />
+        <div className="flex flex-wrap bg-black justify-center gap-10 px-3 py-10">
+          <Testimonials title="What Our Users Say" description="Discover how PingMe has helped businesses maintain uptime and reliability." />
+          <Testimonials title="Customer Reviews" description="Real feedback from our satisfied users who trust PingMe for website monitoring." />
+          <Testimonials title="Trusted by Businesses" description="From startups to enterprises, PingMe ensures uninterrupted service and performance." />
+          <Testimonials title="Why People Love PingMe" description="See why users rely on PingMe for instant alerts and detailed analytics." />
+          <Testimonials title="Real Feedback from Users" description="Honest reviews from people who trust PingMe to keep their websites running smoothly." />
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }
