@@ -93,7 +93,7 @@ export default function Dashboard() {
 
     const handleSubmit = async () => {
         if (!url) return alert("Please enter a URL");
-        if(!url.startsWith("https://") || !url.endsWith("/")) {
+        if(!url.startsWith("https://")) {
             setError(true);
             return;
         }else setError(false)
